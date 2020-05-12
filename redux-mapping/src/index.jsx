@@ -1,16 +1,24 @@
+// * =================================================================
+// * Imports
+// * =================================================================
+
+// React
 import React from "react";
 import ReactDOM from "react-dom";
-import * as serviceWorker from "./services/serviceWorker";
-import Landing from "./components/Landing/Landing";
-import Invalid from "./components/Invalid/Invalid";
-
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
-
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+// Redux
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-
+// Components
+import Landing from "./components/Landing/Landing";
+import Invalid from "./components/Invalid/Invalid";
+// Functions
 import tweetsReducer from "./model/reducers/TweetsReducer";
 import userReducer from "./model/reducers/UserReducer";
+
+// * =================================================================
+// * Functional setup
+// * =================================================================
 
 // combine all reducers.
 const reducers = combineReducers({
@@ -34,8 +42,8 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route exact path="/" component={Landing}/>
-          <Route component={Invalid}/>
+          <Route exact path="/" component={Landing} />
+          <Route component={Invalid} />
         </Switch>
       </Router>
     </Provider>
@@ -52,8 +60,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
