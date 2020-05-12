@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./styles/index.css";
-// import App from "./components/App";
 import * as serviceWorker from "./services/serviceWorker";
-import Landing from "./components/Landing";
+import Landing from "./components/Landing/Landing";
+import Invalid from "./components/Invalid/Invalid";
 
-import { Provider } from "react-redux";
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+
 import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
 import tweetsReducer from "./model/reducers/TweetsReducer";
 import userReducer from "./model/reducers/UserReducer";
@@ -31,7 +32,12 @@ store.dispatch({ type: "CHANGE_AGE", payload: 35 });
 const App = () => {
   return (
     <Provider store={store}>
-      <Landing />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Landing}/>
+          <Route component={Invalid}/>
+        </Switch>
+      </Router>
     </Provider>
   );
 };

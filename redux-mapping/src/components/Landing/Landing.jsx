@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import "../styles/Landing.less";
+import "./Landing.less";
 
 const styles = StyleSheet.create({
   center: {
