@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./styles/index.css";
 // import App from "./components/App";
 import * as serviceWorker from "./services/serviceWorker";
+import Landing from "./components/Landing";
 
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
@@ -20,13 +21,20 @@ const store = createStore(reducers);
 
 store.subscribe(() => {
   console.log("Store changed:", store.getState());
+  // TODO maybe more here based on any events
 });
 
 store.dispatch({ type: "CHANGE_NAME", payload: "Will" });
 store.dispatch({ type: "CHANGE_AGE", payload: 35 });
 
 // Wrap the app in a provider component which maintains the store.
-const App = () => <Provider store={store}></Provider>;
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Landing />
+    </Provider>
+  );
+};
 
 // =================================================================
 // React's default rendering method.
