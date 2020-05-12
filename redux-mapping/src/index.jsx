@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 // Components
 import Landing from "./components/Landing/Landing";
 import Invalid from "./components/Invalid/Invalid";
-// Functions
+// Reducer functions
 import tweetsReducer from "./model/reducers/TweetsReducer";
 import userReducer from "./model/reducers/UserReducer";
 
@@ -21,12 +21,12 @@ import userReducer from "./model/reducers/UserReducer";
 // * =================================================================
 
 // combine all reducers.
-const reducers = combineReducers({
-  user: userReducer,
-  tweet: tweetsReducer,
-});
-
-const store = createStore(reducers);
+const store = createStore(
+  combineReducers({
+    user: userReducer,
+    tweet: tweetsReducer,
+  })
+);
 
 store.subscribe(() => {
   console.log("Store changed:", store.getState());
@@ -35,6 +35,10 @@ store.subscribe(() => {
 
 store.dispatch({ type: "CHANGE_NAME", payload: "Will" });
 store.dispatch({ type: "CHANGE_AGE", payload: 35 });
+
+// * =================================================================
+// * App rendering
+// * =================================================================
 
 // Wrap the app in a provider component which maintains the store.
 const App = () => {

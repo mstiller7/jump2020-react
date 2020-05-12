@@ -1,5 +1,3 @@
-// 404 page
-
 import React from "react";
 import { Component } from "react";
 import { View, Text } from "react-native";

@@ -1,15 +1,17 @@
 import React from "react";
 import { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
+// Styles
 import "./Landing.less";
 
 export default class Landing extends Component {
   render() {
     return (
-      <View style={styles.center}>
-        <Greeting name="Matthew" />
-        <Greeting name="Jillian" />
-        <Greeting name="Gabby" />
+      <View style={{padding: 10}}>
+        <TextInput placeholder="Your words go here." />
+        {/* <Greeting name="Matthew" /> */}
+        {/* <Greeting name="Jillian" /> */}
+        {/* <Greeting name="Gabby" /> */}
       </View>
     );
   }
