@@ -1,0 +1,17 @@
+{
+  "name": "pocketmap",
+  "displayName": "pocketmap",
+  "expo": {
+    "name": "pocketmap",
+    "slug": "pocketmap",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
