@@ -1,37 +1,73 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-class App extends Component {
+export default class App extends Component {
+
   render() {
     return (
       <div>
-        <Header />
-        <Terminal />
-      </div>);
+        <Counter />
+      </div>
+    );
   }
 }
 
-class Terminal extends Component {
+function Counter() {
+  // defines "count" and a function "setCount" to update the count var
+  const [count, setCount] = useState(0);
+  // useEffect(() => { console.log("Clicked!") });
 
+  return (
+    <Fragment>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Add</button>
+    </Fragment>
+  )
+}
+
+// class App extends Component {
+//   render() {
+//     return (
+//       <div>
+//         <Header />
+//         <Terminal />
+//       </div>);
+//   }
+// }
+
+class Terminal extends Component {
   state = {
-    isLoggedIn: false
+    character: "",
+    loading: false,
+    isLoggedIn: false,
+  };
+
+  componentDidMount() {
+    fetch("https://ipinfo.io/json")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ loading: false, character: data });
+      });
   }
 
   toggleLogged = () => {
     this.setState((state) => {
       return {
-        isLoggedIn: !state.isLoggedIn
-      }
+        isLoggedIn: !state.isLoggedIn,
+      };
     });
-  }
+  };
 
   render() {
     return (
       <Fragment>
         <p>You are: {this.state.isLoggedIn ? "Logged In" : "Logged Out"}</p>
-        <button onClick={this.toggleLogged}>{this.state.isLoggedIn ? "Log Out" : "Log In"}</button>
+        <button onClick={this.toggleLogged}>
+          {this.state.isLoggedIn ? "Log Out" : "Log In"}
+        </button>
+        <p>{this.state.loading ? "Loading" : this.state.character.city}</p>
       </Fragment>
-    )
+    );
   }
 }
 
@@ -40,28 +76,23 @@ class Terminal extends Component {
 class Body extends Component {
   state = {
     message: "Loading...",
-    imgsrc: "https://i.imgur.com/ulhIDCW.gifv"
-  }
+    imgsrc: "https://i.imgur.com/ulhIDCW.gifv",
+  };
 
   changeState = (props) => {
     this.setState(() => {
       return {
         message: props[0],
-        imgsrc: props[1]
-      }
+        imgsrc: props[1],
+      };
     });
-  }
+  };
 
-  componentWillMount() {
-
-  }
+  componentWillMount() { }
 
   componentDidMount() {
     setTimeout(() => {
-      this.changeState([
-        "Your page has loaded",
-        ""
-      ]);
+      this.changeState(["Your page has loaded", ""]);
     }, 1500);
   }
   render() {
@@ -70,31 +101,27 @@ class Body extends Component {
         <p>Page Status: {this.state.message}</p>
         <img src={this.state.imgsrc} alt="" />
       </div>
-    )
+    );
   }
 }
 
 // #2
 class Header extends Component {
   render() {
-    return (
-      <h1>Status Dashboard</h1>
-    );
+    return <h1>Status Dashboard</h1>;
   }
 }
 
 class Footer extends Component {
   render() {
-    return (
-      <p style={sFooter}>There are 3 feet to a yard.</p>
-    )
+    return <p style={sFooter}>There are 3 feet to a yard.</p>;
   }
 }
 
 const sFooter = {
   fontSize: 12,
-  fontStyle: "oblique"
-}
+  fontStyle: "oblique",
+};
 
 // #3
 // class Greeting extends Component {
@@ -161,7 +188,7 @@ const style = {
   fontSize: 30,
   color: "white",
   backgroundColor: "red",
-  fontStyle: "oblique"
-}
+  fontStyle: "oblique",
+};
 
 ReactDOM.render(<App />, document.getElementById("root"));
