@@ -12,28 +12,28 @@ export default class App extends Component {
   }
 }
 
-function Counter() {
-  // defines "count" and a function "setCount" to update the count var
-  const [count, setCount] = useState(0);
-  // useEffect(() => { console.log("Clicked!") });
+// function Counter() {
+//   // defines "count" and a function "setCount" to update the count var
+//   const [count, setCount] = useState(0);
+//   // useEffect(() => { console.log("Clicked!") });
 
-  return (
-    <Fragment>
-      <h1>{count}</h1>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-    </Fragment>
-  )
-}
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <Header />
-//         <Terminal />
-//       </div>);
-//   }
+//   return (
+//     <Fragment>
+//       <h1>{count}</h1>
+//       <button onClick={() => setCount(count + 1)}>Add</button>
+//     </Fragment>
+//   )
 // }
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Terminal />
+      </div>);
+  }
+}
 
 class Terminal extends Component {
   state = {
