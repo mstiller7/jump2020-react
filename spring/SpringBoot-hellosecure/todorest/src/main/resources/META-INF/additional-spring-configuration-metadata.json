@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "todo.amqp.queue",
+      "type": "java.lang.String",
+      "description": "Description for todo.amqp.queue."
+    }
+  ]
+}

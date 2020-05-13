@@ -1,0 +1,47 @@
+.header {
+  background: darkslategray;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  font-size: 30;
+  color: white;
+  padding: 3px;
+}
+
+.spoiler {
+  color:white;
+  transition: background-color 0.3s linear;
+  padding: 5px;
+}
+.spoiler:hover{
+  background-color:black;
+}
+
+.joke {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Products */
+* {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.name {
+  font-size: large;
+  color: white;
+  background-color: chocolate;
+  padding: 5px;
+}
+
+.price {
+  font-weight: 600;
+  color: red;
+}
+
+.desc {
+  font-style: oblique;
+}
+
+.itemname {
+  color: white;
+}

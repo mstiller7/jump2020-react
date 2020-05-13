@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<h1>Movie Hangman</h1>
+<hr>
+<br>
+<div id="mystery">#######</div>
+
+<p>
+  The movie genre is: Disney
+</p>
+
+
+<img id="hangman" src="0.png">
+<br /><br />
+
+<form id="entry" onsubmit="makeGuess(); return false">
+  <label for="attempt">Guess:</label>
+  <input id="attempt" type="text" />
+</form>
+
+<script>
+
+  const MAX = 6;
+  const ANSWER = 'tangled';
+  let wrong = 0;
+
+  function makeGuess() {
+
+    if (wrong >= MAX) {
+      alert("You've lost!");
+      return;
+    }
+
+    let guess = document.getElementById("attempt").value;
+    let existing = document.getElementById("mystery").innerText;
+
+    let i = ANSWER.indexOf(guess);
+    if (i >= 0) {
+      alert("That's correct!");
+      document.getElementById("mystery").innerText = edit(existing, i, ANSWER[i]);
+    } else {
+      alert("That's incorrect...")
+      updateImg(++wrong);
+    }
+
+    document.getElementById("entry").reset();
+  }
+
+  function updateImg(stage) {
+    let img = document.getElementById("hangman");
+    img.src = stage + ".png";
+  }
+
+  function edit(string, index, replacement) {
+    return (
+      string.substr(0, index)
+      + replacement
+      + string.substr(index + replacement.length));
+  }
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.5/lib/darkmode-js.min.js"></script>
+<script>
+  new Darkmode().showWidget();
+</script>

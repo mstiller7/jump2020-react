@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "country.amqp.queue",
+      "type": "java.lang.String",
+      "description": "Description for country.amqp.queue."
+    }
+  ]
+}

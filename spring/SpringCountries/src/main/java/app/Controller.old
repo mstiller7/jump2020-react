@@ -1,0 +1,33 @@
+package app;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Controller {
+	
+	@GetMapping("/")
+	public String getRoot() {
+		return ("Hello quarantine.");
+	}
+	
+	@GetMapping("/countries")
+	public Object getCountries() {
+		return Country.getCountries();
+	}
+	
+	@GetMapping("/pop/{name}")
+	public String getPopulations(@PathVariable String name) {
+		
+		for (Country c : Country.getCountries()) {
+			if (c.getName().toLowerCase().equals(name.toLowerCase())) {
+				return name + " has a population of: " + c.getPopulation();
+			}
+		}
+		
+		return "404: The requested country was unable to be found.";
+		
+	}
+	
+}

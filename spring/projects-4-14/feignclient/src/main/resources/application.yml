@@ -1,0 +1,13 @@
+spring:
+  application: 
+    name: spring-cloud-feign-client 
+server:
+  port: 5000 
+ 
+eureka:
+  client: 
+    service-url: 
+      default-zone: ${EUREKA_URI:http://localhost:8761/eureka} 
+  instance:
+    prefer-ip-address: true
+  status-page-url-path: http://${eureka.instance.hostname}:${server.port}/
