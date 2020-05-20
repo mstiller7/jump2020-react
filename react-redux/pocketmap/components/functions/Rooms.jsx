@@ -1,22 +1,21 @@
 import Axios from "axios";
 
 export function updateRooms() {
-  Axios.get("http://localhost:8080/customers")
+  Axios.get("http://localhost:8080/rooms")
     .then((response) => {
       // takes the given data path from the server API response
-      const data = response.data._embedded.customers;
+      const data = response.data._embedded.rooms;
 
-      const customers = data.map((c) => {
+      const rooms = data.map((r) => {
         return {
-          nameF: c.firstName,
-          nameL: c.lastName,
+          name: r.name,
         };
       });
 
-      console.log(customers);
+      console.log(rooms);
 
       // dispatch the customers to the store
-      return customers;
+      return rooms;
     })
     .catch((error) => console.log(error));
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(allowedHeaders = {"*"})
 // defines the REST path; e.g. "localhost:8080/customers"
 @RepositoryRestResource(collectionResourceRel = "rooms", path = "rooms")
-public interface CustomerRepository extends PagingAndSortingRepository<Room, Long> {
+public interface RoomRepository extends PagingAndSortingRepository<Room, Long> {
 	
-	List<Room> findRoom(@Param("name") String name);
+	List<Room> findRoomByName(@Param("name") String name);
 	
 }
