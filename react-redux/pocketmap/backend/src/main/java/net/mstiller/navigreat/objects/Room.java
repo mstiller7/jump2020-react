@@ -1,18 +1,12 @@
 package net.mstiller.navigreat.objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
-@Entity
 public class Room {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	@Id	public String id;
 	
-	private String name;
+	public String name;
 	
 	public Room() {
 	}
@@ -21,11 +15,4 @@ public class Room {
 		this.name = name;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
 }

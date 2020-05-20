@@ -18,6 +18,9 @@ public class NavigreatApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
+	
+//		clear db
+		rooms.deleteAll();
 		
 		rooms.save(new Room("lobby"));
 		

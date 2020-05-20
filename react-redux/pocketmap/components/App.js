@@ -29,15 +29,16 @@ import Map from "./Map/Map";
 // combine all reducers.
 const store = createStore(
   combineReducers({
-    user: userReducer,
+    // user: userReducer,
   })
 );
 
 store.subscribe(() => {
-  console.log("Store changed:", store.getState());
+  // console.log("Store changed:", store.getState());
+  // do stuff here
 });
 
-store.dispatch({ type: "CHANGE_USER", payload: "Matthew" });
+// store.dispatch({ type: "CHANGE_USER", payload: "Matthew" });
 
 // * =================================================================
 // * App rendering
