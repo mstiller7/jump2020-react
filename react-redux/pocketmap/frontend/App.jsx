@@ -12,7 +12,7 @@ export const useOvermind = createHook();
 // ? Construct UI
 import UI from "./UI";
 
-const App = (props) => {
+const App = () => {
   return (
     <Provider value={overmind}>
       <UI />
