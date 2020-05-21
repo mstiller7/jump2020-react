@@ -3,31 +3,30 @@ import axios from "axios";
 
 const server = "http://localhost:8080";
 
-export const api = (() => {
-  let app: any;
+export class API {
+  private app;
+  private server;
+  private request;
 
-  return {
-    initialize() {
-      // TODO any initialization for the 'app' state.
-    },
-    // ? Maps the rooms data to an array of values.
-    updateRooms() {
-      const rooms = axios
-        .get(server + "/rooms")
-        .then((response) => {
-          const rooms = response.data._embedded.rooms.map(
-            (r: { name: any }) => {
-              return {
-                name: r.name,
-                // TODO more rooms data as desired.
-              };
-            }
-          );
-          return rooms;
-        })
-        .catch(this.handleError);
-      console.log(rooms);
+  constructor(server, request) {
+    this.server = server;
+    this.request = request;
+  }
+
+  // ? Maps the rooms data to an array of values.
+  updateRooms() {
+    const rooms = this.request.get(`${this.server}/rooms`).then((response) => {
+      const rooms = response.data._embedded.rooms.map((r: { name: any }) => {
+        return {
+          name: r.name,
+          // TODO more rooms data as desired.
+        };
+      });
       return rooms;
-    },
-  };
-})();
+    });
+    console.log(rooms);
+    return rooms;
+  }
+}
+
+export const api = new API(server, axios);

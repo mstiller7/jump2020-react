@@ -11,7 +11,7 @@ export const logout: Action<string> = ({ state }) => {
 
 // ? Clear all rooms from the state and retrieve a fresh copy.
 export const refreshRooms: Action<any> = async ({ state, effects }) => {
-  state.rooms = [];
+  // state.rooms = [];
   state.rooms = await effects.api.updateRooms();
 };
 
