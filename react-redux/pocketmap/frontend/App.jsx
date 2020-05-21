@@ -1,23 +1,29 @@
 // React/Native
 import React from "react";
+import "react-native-gesture-handler";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+// Components
+import Landing from "./components/Landing/Landing";
+import Map from "./components/Map/Map";
 
 // ? Setup Overmind
-import { createOvermind } from "overmind";
-import { createHook, Provider } from "overmind-react";
-import config from "./overmind/config";
-
-const overmind = createOvermind(config);
-export const useOvermind = createHook();
+import { useOvermind } from "./overmind/config";
 
 // ? Construct UI
-import UI from "./UI";
+const Stack = createStackNavigator();
 
-const App = () => {
+export default function App() {
+  const { state, actions, effects, reaction } = useOvermind();
+
   return (
-    <Provider value={overmind}>
-      <UI />
-    </Provider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Landing">
+        <Stack.Screen name="Landing" component={Landing} />
+        <Stack.Screen name="Map" component={Map} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
-export default App;
+// export default App;

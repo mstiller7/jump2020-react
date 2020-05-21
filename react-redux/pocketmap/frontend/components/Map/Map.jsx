@@ -1,8 +1,19 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 // Styles
 import "./Map.less";
+import { useOvermind } from "../../overmind/config";
 
 export default function Map() {
-  return <View style={{ padding: "10px" }}></View>;
+  const { state } = useOvermind();
+
+  return (
+    <View style={{ padding: "10px" }}>
+      <ul>
+        {state.rooms.map((room) => (
+          <Text key={room.id}>{room.name}</Text>
+        ))}
+      </ul>
+    </View>
+  );
 }
