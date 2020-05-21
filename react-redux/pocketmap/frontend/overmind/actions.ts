@@ -1,10 +1,10 @@
 // overmind/actions.ts
 import { Action } from "overmind";
 
-export const increment: Action<number> = ({ state }, incrementBy) => {
-  state.counter += incrementBy;
+export const login: Action<string> = ({ state }, user) => {
+  state.user = user;
 };
 
-export const decrement: Action<number> = ({ state }, decrementBy) => {
-  state.counter -= decrementBy;
+export const logout: Action<string> = ({ state }) => {
+  state.user = "Guest";
 };

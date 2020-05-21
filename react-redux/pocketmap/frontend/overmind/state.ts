@@ -1,9 +1,8 @@
-// overmind/state.ts
 type State = {
-  counter: number;
+  user: string;
 };
 
 export const state: State = {
-  counter: 0,
+  user: "Guest",
 };
 
