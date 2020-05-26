@@ -14,10 +14,10 @@ export class API {
   }
 
   // ? Maps the rooms data to an array of values.
-  async updateRooms() {
+  updateRooms = () => {
     // TODO proper ID mapping; room has an `_id` value?
     let id = 0;
-    const rooms = await this.request
+    const rooms = this.request
       .get(`${this.server}/rooms`)
       .then((response) => {
         const rooms = response.data._embedded.rooms.map((r: { name: any }) => {
