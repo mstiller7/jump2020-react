@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 // Components
 import Landing from "./components/Landing/Landing";
 import Map from "./components/Map/Map";
+import Rooms from "./components/Rooms/Rooms";
 
 // ? Setup Overmind
 import { useOvermind } from "./overmind/config";
@@ -21,6 +22,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen name="Landing" component={Landing} />
         <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Rooms" component={Rooms} />
       </Stack.Navigator>
     </NavigationContainer>
   );

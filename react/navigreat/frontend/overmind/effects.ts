@@ -27,7 +27,6 @@ export class API {
       });
       return rooms;
     });
-    console.log(rooms);
     return rooms;
   }
 }

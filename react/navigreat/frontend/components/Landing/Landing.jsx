@@ -3,13 +3,12 @@ import { View, Button } from "react-native";
 // Styles
 import "./Landing.less";
 
-export default function Landing({navigation}) {
+export default function Landing({ navigation }) {
+
   return (
     <View style={{ padding: "10px" }}>
-      <Button
-        title="View Maps"
-        onPress={() => navigation.navigate("Map")}
-      />
+      <Button title="View Maps" onPress={() => navigation.navigate("Map")} />
+      <Button title="View Rooms" onPress={() => navigation.navigate("Rooms")} />
     </View>
   );
 }
