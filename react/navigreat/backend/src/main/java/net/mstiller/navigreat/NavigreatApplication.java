@@ -1,6 +1,5 @@
 package net.mstiller.navigreat;
 
-import net.mstiller.navigreat.objects.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,11 +17,11 @@ public class NavigreatApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-	
+
 //		clear db
-		rooms.deleteAll();
+//		rooms.deleteAll();
 		
-		rooms.save(new Room("lobby"));
+//		rooms.save(new Room("lobby"));
 		
 	}
 	
