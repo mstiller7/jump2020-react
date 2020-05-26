@@ -1,10 +1,10 @@
 {
-  "name": "pocketmap",
-  "displayName": "pocketmap",
+  "name": "navigreat",
+  "displayName": "navigreat",
   "expo": {
-    "name": "pocketmap",
-    "slug": "pocketmap",
-    "version": "1.0.0",
+    "name": "navigreat",
+    "slug": "navigreat",
+    "version": "0.1",
     "platforms": [
       "ios",
       "android",
