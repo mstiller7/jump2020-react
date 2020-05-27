@@ -1,6 +1,15 @@
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
-import { Card, ListItem } from "react-native-elements";
+import { Image } from "react-native";
+import {
+  Container,
+  Card,
+  Content,
+  CardItem,
+  Left,
+  Body,
+  Text,
+  Thumbnail,
+} from "native-base";
 // Styles
 import "./Rooms.less";
 import { useOvermind } from "../../overmind/config";
@@ -15,19 +24,34 @@ export default function Rooms() {
   }, []);
   // ? the empty array here ensures the component
   // ? doesn't continually re-render.
-  
   // TODO add a refresh button?
-  // useEffect(() => {
-  //   actions.refreshRooms();
-  // }, [state.rooms.length]);
 
   return (
-    <View style={{ padding: "10px" }}>
-      <Card>
+    <Container>
+      {/* <Header /> */}
+      <Content>
         {state.rooms.map((room, i) => {
-          return <ListItem key={i} title={room.name} />;
+          return (
+            <Card key={i}>
+              <CardItem>
+                <Left>
+                  <Thumbnail source="https://i.imgur.com/PYVEDqI.jpg" />
+                  <Body>
+                    <Text>{room.name}</Text>
+                    <Text note>Location:</Text>
+                  </Body>
+                </Left>
+              </CardItem>
+              <CardItem cardBody>
+                <Image
+                  source="https://i.imgur.com/PYVEDqI.jpg"
+                  style={{ height: 200, width: null, flex: 1 }}
+                />
+              </CardItem>
+            </Card>
+          );
         })}
-      </Card>
-    </View>
+      </Content>
+    </Container>
   );
 }
