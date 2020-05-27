@@ -4,5 +4,5 @@ POST http://localhost:8080/rooms
 content-type: application/json
 
 {
-    "name": "office-ceo"
+    "name": "office-assistant"
 }
