@@ -43,4 +43,7 @@ target 'pocketmap' do
 
   # react-native-cli autolinking
   use_native_modules!
+
+  pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
+
 end
