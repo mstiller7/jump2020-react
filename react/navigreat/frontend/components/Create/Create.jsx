@@ -1,6 +1,7 @@
 import React from "react";
 import { useOvermind } from "../../overmind/config";
-import { Input, Button, Text } from "react-native-elements";
+import { Button } from "react-native";
+import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";
 
 export default function Create() {
@@ -13,12 +14,11 @@ export default function Create() {
           <Item>
             <Input placeholder="Title" />
           </Item>
-          <Button onPress={() => actions.pickPhoto()}>
-            <Text>Select Photo</Text>
-          </Button>
-          <Button onPress={() => actions.createRoom(state.title, state.photo)}>
-            <Text>Select Photo</Text>
-          </Button>
+          <Button title="Select Photo" onPress={() => actions.pickPhoto()} />
+          <Button
+            title="Submit"
+            onPress={() => actions.createRoom("sample", state.photo)}
+          />
         </Form>
       </Content>
     </Container>

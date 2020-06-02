@@ -19,12 +19,15 @@ export const findRoom: Action<string> = ({ state }, room) => {
   }
 };
 
-export const createRoom = async ({ state, effects }, title, image) => {
-  state.photo = await effects.api.createRoom(title, image);
+// ! works fine!
+export const pickPhoto = async ({ state, effects }) => {
+  await effects.api.pickFile().then((file) => {
+    state.photo = file;
+  });
 };
 
-export const pickPhoto = ({ state, effects }) => {
-  state.photo = effects.api.pickFile();
+export const createRoom = async ({ state, effects }, title) => {
+  await effects.api.createRoom(title, state.photo);
 };
 
 export const insertRoom: Action<any> = ({ state }, room) => {

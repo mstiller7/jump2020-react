@@ -1,6 +1,8 @@
 export { default as http } from "axios";
 import axios from "axios";
-import DocumentPicker from "react-native-document-picker";
+// import DocumentPicker from "react-native-document-picker";
+import * as DocumentPicker from "expo-document-picker";
+// import { v4 as uuidv4 } from 'uuid';
 
 const server = "http://localhost:8080";
 
@@ -31,41 +33,61 @@ export class API {
     return rooms;
   };
 
-  pickFile = async () => {
+  async pickFile() {
+    // try {
+    //   const photo = await DocumentPicker.pick({
+    //     type: [DocumentPicker.types.images],
+    //   });
+    //   console.log(photo.uri, photo.type, photo.name, photo.size);
+    //   return photo;
+    // } catch (err) {
+    //   throw err;
+    // }
     try {
-      const photo = await DocumentPicker.pick({
-        type: [DocumentPicker.types.images],
+      const photo = await DocumentPicker.getDocumentAsync({
+        type: "image/*",
       });
-      console.log(photo.uri, photo.type, photo.name, photo.size);
       return photo;
     } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // user cancelled, exit and continue
-      } else {
-        throw err;
-      }
+      throw err;
     }
-  };
+  }
 
   // ? POSTs a room object to the DB.
   // ? takes a title String and an image file.
   createRoom = (title, image) => {
     var data = new FormData();
-    data.set("title", title);
-    data.append("image", image);
+    data.append("title", title);
+    data.append("image", new Blob([image], { type: "image" }));
+    console.log(...data);
 
-    this.request({
-      method: "post",
-      url: `${this.server}/photos/add`,
-      data: data,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (response) {
-        console.log(response);
-      });
+    // const config = {
+    //   headers: {
+    //     "content-type": "multipart/form-data",
+    //   },
+    // };
+
+    // axios.interceptors.request.use( => {
+    //   console.log(request);
+    // })
+
+    axios
+      .post(`${this.server}/photos/add`, data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    // this.request({
+    //   method: "post",
+    //   url: `${this.server}/photos/add`,
+    //   data: body,
+    //   // headers: { "Content-Type": `multipart/form-data; boundary=${body._boundary}` },
+    // })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (response) {
+    //     console.log(response);
+    //   });
   };
 }
 
