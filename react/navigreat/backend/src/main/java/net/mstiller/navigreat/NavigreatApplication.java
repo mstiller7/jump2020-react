@@ -5,22 +5,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
 import java.util.Base64;
 
+@CrossOrigin(allowedHeaders = {"*"}, origins = "http://localhost")
 @SpringBootApplication
 public class NavigreatApplication implements CommandLineRunner {
 	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+				.allowedOrigins("*")
+				.allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS");
+			}
+		};
+	}
+	
 	@Autowired
 	private RoomRepository rooms;
-	
 	@Autowired
 	private PhotoService photos;
 	
@@ -33,20 +45,5 @@ public class NavigreatApplication implements CommandLineRunner {
 	
 	}
 	
-	@PostMapping("/photos/add")
-	public String addPhoto(
-	@RequestParam("title") String title,
-	@RequestParam("image") MultipartFile image, Model model) throws IOException {
-		String id = photos.addPhoto(title, image);
-		return "redirect:/photos/" + id;
-	}
-	
-	@GetMapping("/photos/{id}")
-	public String getPhoto(@PathVariable String id, Model model) {
-		Photo photo = photos.getPhoto(id);
-		model.addAttribute("title", photo.getTitle());
-		model.addAttribute("image", Base64.getEncoder().encodeToString(photo.getImage().getData()));
-		return "photos";
-	}
 	
 }
