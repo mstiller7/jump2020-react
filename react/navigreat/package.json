@@ -15,6 +15,7 @@
     "axios": "^0.19.2",
     "eslint-plugin-react-hooks": "0.0.0-33c3af284",
     "expo": "^37.0.11",
+    "expo-document-picker": "^8.1.0",
     "expo-splash-screen": "^0.2.3",
     "expo-updates": "^0.2.3",
     "less": "^3.11.1",
@@ -35,7 +36,8 @@
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "~0.11.7",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
