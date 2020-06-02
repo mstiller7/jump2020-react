@@ -17,6 +17,7 @@ export default function Create() {
           <Button title="Select Photo" onPress={() => actions.pickPhoto()} />
           <Button
             title="Submit"
+            // TODO capture the user's input and put it as the title below
             onPress={() => actions.createRoom("sample", state.photo)}
           />
         </Form>
