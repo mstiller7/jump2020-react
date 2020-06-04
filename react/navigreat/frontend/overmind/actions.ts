@@ -27,7 +27,10 @@ export const pickPhoto = async ({ state, effects }) => {
 };
 
 export const createRoom = async ({ state, effects }, title) => {
-  await effects.api.createRoom(title, state.photo);
+  // console.log(state.photo);
+  await effects.api.createRoom(title, state.photo).then((image) => {
+    state.photo = image;
+  });
 };
 
 export const insertRoom: Action<any> = ({ state }, room) => {
