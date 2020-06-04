@@ -1,23 +1,17 @@
 package net.mstiller.navigreat;
 
-import net.mstiller.navigreat.objects.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.io.IOException;
-import java.util.Base64;
-
-@CrossOrigin(allowedHeaders = {"*"}, origins = "http://localhost")
+//@CrossOrigin(allowedHeaders = {"*"}, origins = "http://localhost")
 @SpringBootApplication
 public class NavigreatApplication implements CommandLineRunner {
+	
 	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
