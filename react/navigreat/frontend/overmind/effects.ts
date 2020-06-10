@@ -43,7 +43,6 @@ export class API {
       const photo = await DocumentPicker.getDocumentAsync({
         type: "image/*",
       });
-      console.log(photo);
       return photo;
     } catch (err) {
       throw err;
@@ -53,43 +52,20 @@ export class API {
   // ? POSTs a room object to the DB.
   // ? takes a title String and an image file.
   async createRoom(title, file) {
-    console.log(typeof file);
-    console.log(file);
-
-    // var image = new File(file.uri, "stateful file?");
-
     var uri = file.uri;
+
+    var data = new FormData();
+    data.append("title", title);
 
     fetch(uri).then((res) =>
       res.blob().then((blob) => {
-        console.log("blob:", blob);
-
-        var data = new FormData();
-
-        // var data = getBase64(file)
-
-        data.append("title", title);
-        // TODO this Blob is failing me... shrinking the size to 15
-        data.append("image", blob, "keyboard.jpeg"); //new Blob([file], { type: "image" }));
-        for (let value of data.values()) {
-          console.log(typeof value);
-        }
-
+        data.append("image", blob, title);
         // TODO abstract `axios`? may be unnecessary
         axios
-          .post(`${this.server}/photos/add`, data, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          })
+          .post(`${this.server}/api/photos`, data)
           .then((res) => {
             console.log(res);
-            // var img = new Image();
-            // img.src = 'data:image/png;base64,' + res;
-            // console.log(img);
-            // return img;
           })
-
           .catch((err) => console.log(err));
       })
     );
