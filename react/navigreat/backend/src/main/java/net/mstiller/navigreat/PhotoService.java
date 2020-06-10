@@ -18,7 +18,7 @@ import java.util.Base64;
 public class PhotoService {
 	
 	
-	@PostMapping("/photos/add")
+	@PostMapping("/photos")
 	public String addPhoto(@RequestParam("title") String title,
 	                       @RequestParam("image") MultipartFile image, Model model)
 	throws IOException {
