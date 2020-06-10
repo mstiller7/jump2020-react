@@ -3,7 +3,7 @@ import axios from "axios";
 import * as DocumentPicker from "expo-document-picker";
 
 // TODO remove later on when not in dev
-const server = "http://localhost:8080";
+const server = "http://localhost:8080/api";
 
 function getBase64(file) {
   const reader = new FileReader();
@@ -22,21 +22,25 @@ export class API {
   }
 
   // ? Maps the rooms data to an array of values.
-  updateRooms = () => {
+  async updateRooms() {
     // TODO proper ID mapping; room has an `_id` value?
     let id = 0;
-    const rooms = this.request.get(`${this.server}/rooms`).then((response) => {
-      const rooms = response.data._embedded.rooms.map((r: { name: any }) => {
-        return {
-          id: id++,
-          name: r.name,
-          // TODO more rooms data as desired.
-        };
-      });
-      return rooms;
-    });
+    const rooms = this.request
+      .get(`${this.server}/rooms`)
+      .then((response) => {
+        console.log(response);
+        const rooms = response.data._embedded.rooms.map((r: { name: any }) => {
+          return {
+            id: id++,
+            name: r.name,
+            // TODO more rooms data as desired.
+          };
+        });
+        return rooms;
+      })
+      .catch((err) => console.log(err));
     return rooms;
-  };
+  }
 
   async pickFile() {
     try {
@@ -60,7 +64,7 @@ export class API {
         data.append("image", blob, title);
         // TODO abstract `axios`? may be unnecessary
         axios
-          .post(`${this.server}/api/photos`, data)
+          .post(`${this.server}/photos`, data)
           .then((res) => {
             console.log(res);
           })
