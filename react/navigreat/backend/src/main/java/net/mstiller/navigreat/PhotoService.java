@@ -10,24 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Base64;
 
 @RestController
 @Service
 public class PhotoService {
 	
-	
 	@PostMapping("/photos")
 	public String addPhoto(@RequestParam("title") String title,
 	                       @RequestParam("image") MultipartFile image, Model model)
 	throws IOException {
-		System.out.println(Arrays.toString(image.getBytes()).length());
-		String id = addPhoto(title, image);
-		return "redirect:/photos/" + id;
+		return addPhoto(title, image);
 	}
-	
-	
 	
 	@GetMapping("/photos/{id}")
 	public String getPhoto(@PathVariable String id, Model model) {
@@ -35,9 +29,9 @@ public class PhotoService {
 		model.addAttribute("title", photo.getTitle());
 		model.addAttribute("image",
 		Base64.getEncoder().encodeToString(photo.getImage().getData()));
+//		TODO return something useful here
 		return "photos";
 	}
-	
 	
 	@Autowired
 	private PhotoRepository repo;

@@ -8,10 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-//@CrossOrigin(allowedHeaders = {"*"}, origins = "http://localhost")
 @SpringBootApplication
 public class NavigreatApplication implements CommandLineRunner {
-	
 	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
