@@ -4,6 +4,8 @@ import net.mstiller.navigreat.objects.Photo;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +13,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 @RestController
 @Service
 public class PhotoService {
+	
+	
+	@Autowired
+	private PhotoRepository photos;
+	
+	@GetMapping("/photos")
+	public List<Photo> getPhotos() {
+		return photos.findAll();
+	}
 	
 	@PostMapping("/photos")
 	public String addPhoto(@RequestParam("title") String title,
@@ -24,13 +36,13 @@ public class PhotoService {
 	}
 	
 	@GetMapping("/photos/{id}")
-	public String getPhoto(@PathVariable String id, Model model) {
+	public Photo getPhoto(@PathVariable String id, Model model) {
 		Photo photo = getPhoto(id);
 		model.addAttribute("title", photo.getTitle());
 		model.addAttribute("image",
 		Base64.getEncoder().encodeToString(photo.getImage().getData()));
 //		TODO return something useful here
-		return "photos";
+		return photo;
 	}
 	
 	@Autowired

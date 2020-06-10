@@ -26,7 +26,7 @@ public class NavigreatApplication implements CommandLineRunner {
 	@Autowired
 	private RoomRepository rooms;
 	@Autowired
-	private PhotoService photos;
+	private PhotoService photoService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(NavigreatApplication.class, args);
@@ -34,7 +34,7 @@ public class NavigreatApplication implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-	
+		
 	}
 	
 	
