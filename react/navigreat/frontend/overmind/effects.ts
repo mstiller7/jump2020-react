@@ -50,14 +50,12 @@ export class API {
   }
 
   // ? POSTs a room object to the DB.
-  // ? takes a title String and an image file.
+  // ? takes a title String and file from DocumentPicker.
   async createRoom(title, file) {
-    var uri = file.uri;
-
     var data = new FormData();
     data.append("title", title);
 
-    fetch(uri).then((res) =>
+    fetch(file.uri).then((res) =>
       res.blob().then((blob) => {
         data.append("image", blob, title);
         // TODO abstract `axios`? may be unnecessary
