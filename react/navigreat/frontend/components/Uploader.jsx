@@ -1,5 +1,5 @@
 import React from "react";
-import { useOvermind } from "../../overmind/config";
+import { useOvermind } from "../overmind/config";
 import { Button } from "react-native";
 import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";

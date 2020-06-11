@@ -1,8 +1,6 @@
 export { default as http } from "axios";
 import axios from "axios";
 import * as DocumentPicker from "expo-document-picker";
-import { Form } from "native-base";
-import { createRoom } from "./actions";
 
 // TODO remove later on when not in dev
 const server = "http://localhost:8080/api";

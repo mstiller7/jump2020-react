@@ -1,7 +1,5 @@
 import React from "react";
 import { View, Button } from "react-native";
-// Styles
-import "./Landing.less";
 
 export default function Landing({ navigation }) {
   return (

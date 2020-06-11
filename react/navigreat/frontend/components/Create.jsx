@@ -1,11 +1,11 @@
-import { useOvermind } from "../../overmind/config";
+import { useOvermind } from "../overmind/config";
 import React from "react";
 import { Button } from "react-native";
 import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";
 
 export default function Rooms() {
-  const { state, actions } = useOvermind();
+  const { actions } = useOvermind();
 
   const payload = {
     title: "",

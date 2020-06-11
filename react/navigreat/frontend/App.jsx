@@ -4,11 +4,11 @@ import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 // Components
-import Landing from "./components/Landing/Landing";
-import Map from "./components/Map/Map";
-import Rooms from "./components/Rooms/Rooms";
-import Create from "./components/Create/Create";
-import Uploader from "./components/Uploader/Uploader";
+import Landing from "./components/Landing";
+import Map from "./components/Map";
+import Rooms from "./components/Rooms";
+import Create from "./components/Create";
+import Uploader from "./components/Uploader";
 
 // ? Setup Overmind
 import { useOvermind } from "./overmind/config";

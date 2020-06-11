@@ -10,12 +10,12 @@ import {
   Text,
   Thumbnail,
 } from "native-base";
-// Styles
-import "./Rooms.less";
-import { useOvermind } from "../../overmind/config";
+import { useOvermind } from "../overmind/config";
 
 export default function Rooms() {
   const { state, actions } = useOvermind();
+  
+  console.log(styles);
 
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
@@ -25,6 +25,13 @@ export default function Rooms() {
   // ? the empty array here ensures the component
   // ? doesn't continually re-render.
   // TODO add a refresh button?
+
+  const styles = {
+    title: {
+      // "font-size": "xx-large",
+      "font-weight": "bold",
+    },
+  };
 
   return (
     <Container>
@@ -37,8 +44,10 @@ export default function Rooms() {
                 <Left>
                   <Thumbnail source="https://i.imgur.com/PYVEDqI.jpg" />
                   <Body>
-                    <Text>{room.title}</Text>
-                    <Text note>Location: Building {room.building} #{room.number}</Text>
+                    <Text style={styles.title}>{room.title}</Text>
+                    <Text note>
+                      Location: Building {room.building} #{room.number}
+                    </Text>
                   </Body>
                 </Left>
               </CardItem>
