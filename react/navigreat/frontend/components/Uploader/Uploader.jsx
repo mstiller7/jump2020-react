@@ -8,7 +8,7 @@ export default function Create() {
   const { state, actions } = useOvermind();
 
   const payload = {
-    value: "",
+    name: "",
   };
 
   return (
@@ -17,15 +17,15 @@ export default function Create() {
         <Form>
           <Item>
             <Input
-              placeholder="Title"
-              onChangeText={(text) => (payload.value = text)}
+              placeholder="Name"
+              onChangeText={(text) => (payload.name = text)}
             />
           </Item>
           <Button title="Select Photo" onPress={() => actions.pickPhoto()} />
           <Button
             title="Submit"
             // TODO capture the user's input and put it as the title below
-            onPress={() => actions.createRoom(payload.value, state.photo)}
+            onPress={() => actions.uploadPhoto(payload.name, state.photo)}
           />
         </Form>
       </Content>

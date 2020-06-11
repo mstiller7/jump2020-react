@@ -10,8 +10,10 @@ export const logout: Action<string> = ({ state }) => {
 };
 
 // ? Clear all rooms from the state and retrieve a fresh copy.
-export const refreshRooms: Action<any> = async ({ state, effects }) => {
-  state.rooms = await effects.api.updateRooms();
+export const refreshRooms = async ({ state, effects }) => {
+  await effects.api.updateRooms().then((result) => {
+    state.rooms = result;
+  });
 };
 
 export const findRoom: Action<string> = ({ state }, room) => {
@@ -19,16 +21,15 @@ export const findRoom: Action<string> = ({ state }, room) => {
   }
 };
 
-// ! works fine!
 export const pickPhoto = async ({ state, effects }) => {
-  await effects.api.pickFile().then((file) => {
-    state.photo = file;
+  await effects.api.pickFile().then((result) => {
+    state.photo = result;
   });
 };
 
-export const createRoom = async ({ state, effects }, title) => {
-  await effects.api.createRoom(title, state.photo).then((image) => {
-    state.photo = image;
+export const uploadPhoto = async ({ state, effects }, title) => {
+  await effects.api.uploadPhoto(title, state.photo).then((result) => {
+    state.photo = result;
   });
 };
 

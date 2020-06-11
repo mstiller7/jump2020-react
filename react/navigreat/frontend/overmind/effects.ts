@@ -1,15 +1,11 @@
 export { default as http } from "axios";
 import axios from "axios";
 import * as DocumentPicker from "expo-document-picker";
+import { Form } from "native-base";
+import { createRoom } from "./actions";
 
 // TODO remove later on when not in dev
 const server = "http://localhost:8080/api";
-
-function getBase64(file) {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  return reader.result;
-}
 
 export class API {
   private app;
@@ -23,20 +19,10 @@ export class API {
 
   // ? Maps the rooms data to an array of values.
   async updateRooms() {
-    // TODO proper ID mapping; room has an `_id` value?
-    let id = 0;
-    const rooms = this.request
+    const rooms = axios
       .get(`${this.server}/rooms`)
       .then((response) => {
-        console.log(response);
-        const rooms = response.data._embedded.rooms.map((r: { name: any }) => {
-          return {
-            id: id++,
-            name: r.name,
-            // TODO more rooms data as desired.
-          };
-        });
-        return rooms;
+        return response.data;
       })
       .catch((err) => console.log(err));
     return rooms;
@@ -55,10 +41,12 @@ export class API {
 
   // ? POSTs a room object to the DB.
   // ? takes a title String and file from DocumentPicker.
-  async createRoom(title, file) {
+  // ? returns the MongoDB id of the file object.
+  async uploadPhoto(title, file) {
     var data = new FormData();
     data.append("title", title);
 
+    // uploads the selected image and returns it as the id
     fetch(file.uri).then((res) =>
       res.blob().then((blob) => {
         data.append("image", blob, title);
@@ -66,11 +54,25 @@ export class API {
         axios
           .post(`${this.server}/photos`, data)
           .then((res) => {
-            console.log(res);
+            return(res.data)
           })
           .catch((err) => console.log(err));
       })
     );
+  }
+
+  async createRoom(payload) {
+    var data = new FormData();
+    data.append("payload", payload);
+    // then, need to still create the room
+    axios
+      .post(`${this.server}/rooms`, data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 
