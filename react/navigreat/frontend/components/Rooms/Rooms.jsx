@@ -37,8 +37,8 @@ export default function Rooms() {
                 <Left>
                   <Thumbnail source="https://i.imgur.com/PYVEDqI.jpg" />
                   <Body>
-                    <Text>{room.name}</Text>
-                    <Text note>Location:</Text>
+                    <Text>{room.title}</Text>
+                    <Text note>Location: Building {room.building} #{room.number}</Text>
                   </Body>
                 </Left>
               </CardItem>

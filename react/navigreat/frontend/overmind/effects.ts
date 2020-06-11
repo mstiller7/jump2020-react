@@ -22,6 +22,7 @@ export class API {
     const rooms = axios
       .get(`${this.server}/rooms`)
       .then((response) => {
+        // console.log(response)
         return response.data;
       })
       .catch((err) => console.log(err));

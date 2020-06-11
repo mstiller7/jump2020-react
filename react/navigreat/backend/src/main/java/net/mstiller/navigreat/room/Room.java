@@ -17,19 +17,19 @@ public class Room {
 	public String title;
 	
 	@Field
-	String photo;
+	public String photo;
 	
 	@Field
-	String building;
+	public String building;
 	
 	@Field
-	int floor;
+	public int floor;
 	
 	@Field
-	int number;
+	public int number;
 	
 	@Field
-	int capacity;
+	public int capacity;
 	
 	@Field
 	ArrayList<Reservation> reservations;
@@ -38,12 +38,16 @@ public class Room {
 	public Room() {
 	}
 	
-	public Room(String title) {
+	public Room(String title, String photo, String building, int floor, int number, int capacity) {
 		this.title = title;
+		this.photo = photo;
+		this.building = building;
+		this.floor = floor;
+		this.number = number;
+		this.capacity = capacity;
 	}
 	
-	
-//	we can send a payload array
+	//	we can send a payload array
 //	payload:
 //	[0] name
 //	[1] photo id

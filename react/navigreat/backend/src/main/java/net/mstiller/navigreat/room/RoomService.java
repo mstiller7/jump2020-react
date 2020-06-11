@@ -18,7 +18,7 @@ public class RoomService {
 	
 	@GetMapping("/rooms")
 	public List<Room> getRooms() {
-//		System.out.println(repo.findAll());
+		System.out.println(repo.findAll());
 		return repo.findAll();
 	}
 	
