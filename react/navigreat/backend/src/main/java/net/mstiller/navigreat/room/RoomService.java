@@ -1,6 +1,6 @@
 package net.mstiller.navigreat.room;
 
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +24,15 @@ public class RoomService {
 	
 	//	takes a JSON string
 	@PostMapping("/rooms")
-	public String addRoom(@RequestBody Map<String, Object> json) {
+	public String addRoom(@RequestBody String payload) {
 //		System.out.println(payload);
 		
-		return repo.insert(new Room(
-		(String) json.get("name")
-		)).getId();
+		
+		Room room = new Gson().fromJson(payload, Room.class);
+		System.out.println(room.toString());
+		
+		
+		return repo.insert(room).getId();
 
 
 //		return repo.insert(new Gson().fromJson(payload, Room.class)).getId();

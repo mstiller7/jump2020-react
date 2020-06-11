@@ -14,7 +14,7 @@ public class Room {
 	public String id;
 	
 	@Field
-	public String name;
+	public String title;
 	
 	@Field
 	String photo;
@@ -38,8 +38,8 @@ public class Room {
 	public Room() {
 	}
 	
-	public Room(String name) {
-		this.name = name;
+	public Room(String title) {
+		this.title = title;
 	}
 	
 	
@@ -51,5 +51,19 @@ public class Room {
 	
 	public String getId() {
 		return id;
+	}
+	
+	@Override
+	public String toString() {
+		return "Room{" +
+		"id='" + id + '\'' +
+		", title='" + title + '\'' +
+		", photo='" + photo + '\'' +
+		", building='" + building + '\'' +
+		", floor=" + floor +
+		", number=" + number +
+		", capacity=" + capacity +
+		", reservations=" + reservations +
+		'}';
 	}
 }
