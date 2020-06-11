@@ -1,5 +1,6 @@
 // overmind/actions.ts
 import { Action } from "overmind";
+import { createEffectsHook } from "overmind-react";
 
 export const login: Action<string> = ({ state }, user) => {
   state.user = user;
@@ -33,8 +34,12 @@ export const uploadPhoto = async ({ state, effects }, title) => {
   });
 };
 
-export const insertRoom: Action<any> = ({ state }, room) => {
-  state.rooms.push(room);
+export const postRoom = async ({ state, actions, effects }, payload) => {
+  // state.rooms.push(room);
+  // TODO
+  await effects.api.postRoom(payload).then((result) => {
+    actions.refreshRooms();
+  })
 };
 
 export const removeRoom: Action<any> = ({ state }, room) => {};

@@ -54,19 +54,19 @@ export class API {
         axios
           .post(`${this.server}/photos`, data)
           .then((res) => {
-            return(res.data)
+            return res.data;
           })
           .catch((err) => console.log(err));
       })
     );
   }
 
-  async createRoom(payload) {
-    var data = new FormData();
-    data.append("payload", payload);
+  async postRoom(payload) {
+    console.log(JSON.stringify(payload));
+
     // then, need to still create the room
     axios
-      .post(`${this.server}/rooms`, data)
+      .post(`${this.server}/rooms`, payload)
       .then((res) => {
         console.log(res);
       })
