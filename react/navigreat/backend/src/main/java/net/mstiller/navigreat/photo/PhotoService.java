@@ -1,11 +1,10 @@
-package net.mstiller.navigreat;
+package net.mstiller.navigreat.photo;
 
-import net.mstiller.navigreat.objects.Photo;
+import net.mstiller.navigreat.photo.Photo;
+import net.mstiller.navigreat.photo.PhotoRepository;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,6 @@ import java.util.List;
 @RestController
 @Service
 public class PhotoService {
-	
 	
 	@Autowired
 	private PhotoRepository photos;

@@ -1,11 +1,13 @@
-package net.mstiller.navigreat.objects;
+package net.mstiller.navigreat.room;
 
-import org.bson.types.Binary;
+import net.mstiller.navigreat.Reservation;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
 
+@Document(collection = "rooms")
 public class Room {
 	
 	@Id
@@ -13,6 +15,9 @@ public class Room {
 	
 	@Field
 	public String name;
+	
+	@Field
+	String photo;
 	
 	@Field
 	String building;
@@ -29,9 +34,6 @@ public class Room {
 	@Field
 	ArrayList<Reservation> reservations;
 	
-	@Field
-	private Binary image;
-	
 //	! Important to retain
 	public Room() {
 	}
@@ -40,4 +42,14 @@ public class Room {
 		this.name = name;
 	}
 	
+	
+//	we can send a payload array
+//	payload:
+//	[0] name
+//	[1] photo id
+	
+	
+	public String getId() {
+		return id;
+	}
 }

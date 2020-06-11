@@ -1,4 +1,4 @@
-package net.mstiller.navigreat.objects;
+package net.mstiller.navigreat.photo;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
