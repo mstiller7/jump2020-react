@@ -53,6 +53,8 @@ export class API {
         axios
           .post(`${this.server}/photos`, data)
           .then((res) => {
+            alert("Uploaded photo with ID:" + res.data);
+            // console.log(res.data);
             return res.data;
           })
           .catch((err) => console.log(err));
@@ -61,13 +63,13 @@ export class API {
   }
 
   async postRoom(payload) {
-    console.log(JSON.stringify(payload));
+    // console.log(JSON.stringify(payload));
 
     // then, need to still create the room
     axios
       .post(`${this.server}/rooms`, payload)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         console.log(err);

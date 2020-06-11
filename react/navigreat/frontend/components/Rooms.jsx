@@ -15,7 +15,7 @@ import { useOvermind } from "../overmind/config";
 export default function Rooms() {
   const { state, actions } = useOvermind();
   
-  console.log(styles);
+  // console.log(styles);
 
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
