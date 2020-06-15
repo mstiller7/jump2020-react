@@ -30,14 +30,14 @@ export class API {
   }
 
   /**
-   * Utilizes a document picked dialog to choose a file for upload.
+   * Utilizes a document picker dialog to choose a file for upload.
    */
-  async pickFile() {
+  async pickImage() {
     try {
-      const photo = await DocumentPicker.getDocumentAsync({
+      const image = await DocumentPicker.getDocumentAsync({
         type: "image/*",
       });
-      return photo;
+      return image;
     } catch (err) {
       throw err;
     }
@@ -50,17 +50,18 @@ export class API {
    * @fires axios.post()
    * @return The MongoDB ID String of the uploaded file object.
    */
-  async uploadPhoto(title: string, file) {
+  async uploadImage(image) {
     var data = new FormData();
-    data.append("title", title);
+    data.append("title", image.name);
 
-    fetch(file.uri).then((res) =>
+    fetch(image.uri).then((res) =>
       res.blob().then((blob) => {
-        data.append("image", blob, title);
+        data.append("image", blob, image.name);
         axios
           .post(`${this.server}/photos`, data)
           .then((res) => {
             // TODO alert the user of successful upload.
+            console.log(res.data);
             return res.data;
           })
           // TODO do something useful with the error.

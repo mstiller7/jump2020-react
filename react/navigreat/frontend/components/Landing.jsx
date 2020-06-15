@@ -10,10 +10,6 @@ export default function Landing({ navigation }) {
         title="Create Room"
         onPress={() => navigation.navigate("Create")}
       />
-      <Button
-        title="Upload Images"
-        onPress={() => navigation.navigate("Uploader")}
-      />
     </View>
   );
 }

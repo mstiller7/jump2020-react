@@ -9,11 +9,11 @@ export default function Rooms() {
 
   const payload = {
     title: "",
-    photo: "",
     building: "",
     floor: "",
     number: "",
     capacity: "",
+    image: null,
   };
 
   return (
@@ -26,7 +26,6 @@ export default function Rooms() {
               onChangeText={(text) => (payload.title = text)}
             />
           </Item>
-          <Item>{/* TODO photo selection */}</Item>
           <Item>
             <Input
               placeholder="Building"
@@ -51,7 +50,19 @@ export default function Rooms() {
               onChangeText={(text) => (payload.capacity = text)}
             />
           </Item>
-          <Button title="Submit" onPress={() => actions.postRoom(payload)} />
+          <Button
+            title="Select Image"
+            onPress={() => (payload.image = actions.pickImage())}
+          />
+          <Button
+            title="Confirm Upload"
+            onPress={() => (payload.image = actions.uploadImage(payload.image))}
+          />
+          <Button
+            title="Submit"
+            // disabled
+            onPress={() => actions.postRoom(payload)}
+          />
         </Form>
       </Content>
     </Container>

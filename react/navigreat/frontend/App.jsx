@@ -8,7 +8,6 @@ import Landing from "./components/Landing";
 import Map from "./components/Map";
 import Rooms from "./components/Rooms";
 import Create from "./components/Create";
-import Uploader from "./components/Uploader";
 
 // ? Setup Overmind
 import { useOvermind } from "./overmind/config";
@@ -26,7 +25,6 @@ export default function App() {
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="Rooms" component={Rooms} />
         <Stack.Screen name="Create" component={Create} />
-        <Stack.Screen name="Uploader" component={Uploader} />
       </Stack.Navigator>
     </NavigationContainer>
   );
