@@ -32,7 +32,7 @@ public class Room {
 	public int capacity;
 	
 	@Field
-	ArrayList<Reservation> reservations;
+	public ArrayList<Reservation> reservations;
 	
 //	! Important to retain
 	public Room() {

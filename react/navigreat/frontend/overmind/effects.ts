@@ -15,7 +15,9 @@ export class API {
     this.request = request;
   }
 
-  // ? Maps the rooms data to an array of values.
+  /**
+   * Makes a GET request to obtain the current list of rooms.
+   */
   async updateRooms() {
     const rooms = axios
       .get(`${this.server}/rooms`)
@@ -27,6 +29,9 @@ export class API {
     return rooms;
   }
 
+  /**
+   * Utilizes a document picked dialog to choose a file for upload.
+   */
   async pickFile() {
     try {
       const photo = await DocumentPicker.getDocumentAsync({
@@ -38,40 +43,44 @@ export class API {
     }
   }
 
-  // ? POSTs a room object to the DB.
-  // ? takes a title String and file from DocumentPicker.
-  // ? returns the MongoDB id of the file object.
-  async uploadPhoto(title, file) {
+  /**
+   * Makes a POST request to the webserver containing the file.
+   * @param {String} title Name of file.
+   * @param file File to be sent.
+   * @fires axios.post()
+   * @return The MongoDB ID String of the uploaded file object.
+   */
+  async uploadPhoto(title: string, file) {
     var data = new FormData();
     data.append("title", title);
 
-    // uploads the selected image and returns it as the id
     fetch(file.uri).then((res) =>
       res.blob().then((blob) => {
         data.append("image", blob, title);
-        // TODO abstract `axios`? may be unnecessary
         axios
           .post(`${this.server}/photos`, data)
           .then((res) => {
-            alert("Uploaded photo with ID:" + res.data);
-            // console.log(res.data);
+            // TODO alert the user of successful upload.
             return res.data;
           })
+          // TODO do something useful with the error.
           .catch((err) => console.log(err));
       })
     );
   }
 
+  /**
+   * Makes a POST request to the webserver with a room object.
+   * @param payload JSON-formatted room object.
+   */
   async postRoom(payload) {
-    // console.log(JSON.stringify(payload));
-
-    // then, need to still create the room
     axios
       .post(`${this.server}/rooms`, payload)
       .then((res) => {
-        // console.log(res);
+        // TODO something useful with a successful response.
       })
       .catch((err) => {
+        // TODO something useful with any error.
         console.log(err);
       });
   }
