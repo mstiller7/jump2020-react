@@ -5,10 +5,7 @@ import { config } from "./frontend/overmind/config";
 import * as React from "react";
 import { render } from "react-dom";
 
-const overmind = createOvermind(
-  config,
-  { devtools: "localhost:2077" }
-);
+const overmind = createOvermind(config, { devtools: "localhost:2077" });
 
 import App from "./frontend/App";
 

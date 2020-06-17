@@ -1,6 +1,6 @@
 package net.mstiller.navigreat;
 
-import net.mstiller.navigreat.photo.PhotoService;
+import net.mstiller.navigreat.image.ImageService;
 import net.mstiller.navigreat.room.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +13,7 @@ public class NavigreatApplication implements CommandLineRunner {
 	@Autowired
 	private RoomService rooms;
 	@Autowired
-	private PhotoService photos;
+	private ImageService images;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(NavigreatApplication.class, args);

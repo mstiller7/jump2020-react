@@ -17,7 +17,7 @@ public class Room {
 	public String title;
 	
 	@Field
-	public String photo;
+	public String image;
 	
 	@Field
 	public String building;
@@ -38,9 +38,9 @@ public class Room {
 	public Room() {
 	}
 	
-	public Room(String title, String photo, String building, int floor, int number, int capacity) {
+	public Room(String title, String image, String building, int floor, int number, int capacity) {
 		this.title = title;
-		this.photo = photo;
+		this.image = image;
 		this.building = building;
 		this.floor = floor;
 		this.number = number;
@@ -62,7 +62,7 @@ public class Room {
 		return "Room{" +
 		"id='" + id + '\'' +
 		", title='" + title + '\'' +
-		", photo='" + photo + '\'' +
+		", image='" + image + '\'' +
 		", building='" + building + '\'' +
 		", floor=" + floor +
 		", number=" + number +

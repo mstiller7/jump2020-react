@@ -29,5 +29,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// export default App;

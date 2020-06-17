@@ -1,7 +1,5 @@
-package net.mstiller.navigreat.photo;
+package net.mstiller.navigreat.image;
 
-import net.mstiller.navigreat.photo.Photo;
-import net.mstiller.navigreat.photo.PhotoRepository;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,49 +15,49 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @Service
-public class PhotoService {
+public class ImageService {
 	
 	@Autowired
-	private PhotoRepository photos;
+	private ImageRepository images;
 	
-	@GetMapping("/photos")
-	public List<Photo> getPhotos() {
-		return photos.findAll();
+	@GetMapping("/images")
+	public List<Image> getImages() {
+		return images.findAll();
 	}
 	
-	@PostMapping("/photos")
-	public String addPhoto(@RequestParam("title") String title,
+	@PostMapping("/images")
+	public String addImage(@RequestParam("title") String title,
 	                       @RequestParam("image") MultipartFile image, Model model)
 	throws IOException {
-		return addPhoto(title, image);
+		return addImage(title, image);
 	}
 	
-	@GetMapping("/photos/{id}")
-	public Photo getPhoto(@PathVariable String id, Model model) {
-		Photo photo = getPhoto(id);
-		model.addAttribute("title", photo.getTitle());
+	@GetMapping("/images/{id}")
+	public Image getImage(@PathVariable String id, Model model) {
+		Image image = getImage(id);
+		model.addAttribute("title", image.getTitle());
 		model.addAttribute("image",
-		Base64.getEncoder().encodeToString(photo.getImage().getData()));
+		Base64.getEncoder().encodeToString(image.getImage().getData()));
 //		TODO return something useful here
-		return photo;
+		return image;
 	}
 	
 	@Autowired
-	private PhotoRepository repo;
+	private ImageRepository repo;
 	
 	//	adds a photo file to the db and returns its id as a string.
-	public String addPhoto(String title, MultipartFile file) throws IOException {
-		Photo photo = new Photo(
+	public String addImage(String title, MultipartFile file) throws IOException {
+		Image image = new Image(
 		title,
 		new Binary(BsonBinarySubType.BINARY, file.getBytes())
 		);
-		photo = repo.insert(photo);
-		return photo.getId();
+		image = repo.insert(image);
+		return image.getId();
 		
 	}
 	
 	//	retrieves a given photo if it exists.
-	public Photo getPhoto(String id) {
+	public Image getImage(String id) {
 		return repo.findById(id).get();
 	}
 	

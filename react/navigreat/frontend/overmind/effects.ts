@@ -45,29 +45,29 @@ export class API {
 
   /**
    * Makes a POST request to the webserver containing the file.
-   * @param {String} title Name of file.
-   * @param file File to be sent.
-   * @fires axios.post()
-   * @return The MongoDB ID String of the uploaded file object.
+   * @param image File to be sent.
+   * @return {Promise<String>} The MongoDB ID String of the uploaded file object.
    */
-  async uploadImage(image) {
+  async uploadImage(image): Promise<string> {
     var data = new FormData();
     data.append("title", image.name);
 
-    fetch(image.uri).then((res) =>
+    var result = "";
+
+    await fetch(image.uri).then((res) =>
       res.blob().then((blob) => {
         data.append("image", blob, image.name);
-        axios
-          .post(`${this.server}/photos`, data)
-          .then((res) => {
-            // TODO alert the user of successful upload.
-            console.log(res.data);
-            return res.data;
-          })
-          // TODO do something useful with the error.
-          .catch((err) => console.log(err));
       })
     );
+    await axios
+      .post(`${this.server}/images`, data)
+      .then((response) => {
+        // TODO alert the user of successful upload.
+        result = response.data;
+      })
+      // TODO do something useful with the error.
+      .catch((err) => console.log(err));
+    return result;
   }
 
   /**

@@ -1,9 +1,8 @@
-package net.mstiller.navigreat.photo;
+package net.mstiller.navigreat.image;
 
-import net.mstiller.navigreat.photo.Photo;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 //@RepositoryRestResource(collectionResourceRel = "photos", path = "photos")
-public interface PhotoRepository extends MongoRepository<Photo, String> {
+public interface ImageRepository extends MongoRepository<Image, String> {
 
 }

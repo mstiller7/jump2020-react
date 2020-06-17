@@ -1,11 +1,11 @@
-package net.mstiller.navigreat.photo;
+package net.mstiller.navigreat.image;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "photos")
-public class Photo {
+@Document(collection = "images")
+public class Image {
 	
 	@Id
 	private String id;
@@ -14,7 +14,7 @@ public class Photo {
 	
 	private Binary image;
 	
-	public Photo(String title, Binary image) {
+	public Image(String title, Binary image) {
 		this.title = title;
 		this.image = image;
 	}

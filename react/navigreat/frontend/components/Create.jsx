@@ -1,5 +1,5 @@
 import { useOvermind } from "../overmind/config";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-native";
 import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";
@@ -15,6 +15,18 @@ export default function Rooms() {
     capacity: "",
     image: null,
   };
+
+  const handleSelect = async () => {
+    payload.image = await actions.pickImage();
+  };
+
+  const handleUpload = async () => {
+    console.log("Uploading...");
+    payload.image = await actions.uploadImage();
+    console.log("Uploaded image ID: ", payload.image);
+  };
+
+  // const enabled = payload.image.length > 10;
 
   return (
     <Container>
@@ -50,17 +62,11 @@ export default function Rooms() {
               onChangeText={(text) => (payload.capacity = text)}
             />
           </Item>
-          <Button
-            title="Select Image"
-            onPress={() => (payload.image = actions.pickImage())}
-          />
-          <Button
-            title="Confirm Upload"
-            onPress={() => (payload.image = actions.uploadImage(payload.image))}
-          />
+          <Button title="Select Image" onPress={handleSelect} />
+          <Button title="Confirm Upload" onPress={handleUpload} />
           <Button
             title="Submit"
-            // disabled
+            // disabled={!enabled}
             onPress={() => actions.postRoom(payload)}
           />
         </Form>
