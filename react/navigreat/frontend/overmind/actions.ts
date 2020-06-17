@@ -18,12 +18,7 @@ export const uploadImage = async ({ state, effects }) => {
 };
 
 export const postRoom = async ({ actions, effects }, payload) => {
-  console.log("Room payload: ", payload);
   await effects.api.postRoom(payload).then((result) => {
     actions.refreshRooms();
   });
-};
-
-export const updatePayload = ({ state }, payload) => {
-  state.payload = payload;
 };

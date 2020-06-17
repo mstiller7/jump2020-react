@@ -1,5 +1,5 @@
 import { useOvermind } from "../overmind/config";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "react-native";
 import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";
@@ -21,9 +21,7 @@ export default function Rooms() {
   };
 
   const handleUpload = async () => {
-    console.log("Uploading...");
     payload.image = await actions.uploadImage();
-    console.log("Uploaded image ID: ", payload.image);
   };
 
   // const enabled = payload.image.length > 10;
