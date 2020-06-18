@@ -8,16 +8,16 @@ import {
 } from "overmind-react";
 import { state } from "./state";
 import * as actions from "./actions";
-import * as effects from "./effects";
+// import * as effects from "./effects";
 
-export const config = { state, actions, effects };
+export const config = { state, actions };
 
 declare module "overmind" {
   interface Config
     extends IConfig<{
       state: typeof config.state;
       actions: typeof config.actions;
-      effects: typeof config.effects;
+      // effects: typeof config.effects;
     }> {}
 }
 
