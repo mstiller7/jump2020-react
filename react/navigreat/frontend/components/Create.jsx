@@ -40,21 +40,18 @@ export default function Rooms() {
 
     var result = "";
 
-    await fetch(image.uri).then((res) =>
-      res
-        .blob()
-        .then((blob) => {
-          data.append("image", blob, image.name);
-          return data;
-        })
-        .then((payload) => {
-          console.log(payload);
-          actions.post("images", payload).then((response) => {
-            result = response.data;
-          });
-          return result;
-        })
-    );
+    await fetch(image.uri)
+      .then((res) => {
+        return res.blob();
+      })
+      .then((blob) => {
+        data.append("image", blob, image.name);
+        console.log(data);
+        actions.post(data).then((response) => {
+          result = response.data;
+        });
+      });
+    return result;
   };
 
   // const enabled = payload.image.length > 10;

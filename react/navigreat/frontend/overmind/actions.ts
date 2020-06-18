@@ -30,11 +30,11 @@ export const postRoom = async ({ state, actions }, payload) => {
     });
 };
 
-export const post = async (path, payload) => {
+export const post = async (payload) => {
   var result;
-  console.log(path, payload);
-  await axios
-    .post(`${server}/${path}`, payload)
+  console.log(payload);
+  axios
+    .post(`${server}/images`, payload)
     .then((response) => {
       // TODO alert the user of successful upload.
       console.log(response);
