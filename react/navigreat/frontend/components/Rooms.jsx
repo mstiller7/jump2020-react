@@ -52,10 +52,6 @@ export default function Rooms() {
     // TODO
   };
 
-  const handleNavigate = async (id) => {
-    // TODO
-  };
-
   return (
     <Container>
       {/* <Header /> */}
