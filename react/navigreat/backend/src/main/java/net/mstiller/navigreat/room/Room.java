@@ -46,13 +46,6 @@ public class Room {
 		this.number = number;
 		this.capacity = capacity;
 	}
-	
-	//	we can send a payload array
-//	payload:
-//	[0] name
-//	[1] photo id
-	
-	
 	public String getId() {
 		return id;
 	}

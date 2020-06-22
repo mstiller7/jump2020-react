@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,18 +24,8 @@ public class RoomService {
 	//	takes a JSON string
 	@PostMapping("/rooms")
 	public String addRoom(@RequestBody String payload) {
-//		System.out.println(payload);
-		
-		
 		Room room = new Gson().fromJson(payload, Room.class);
-		System.out.println(room.toString());
-		
-		
 		return repo.insert(room).getId();
-
-
-//		return repo.insert(new Gson().fromJson(payload, Room.class)).getId();
-//		return "null";
 	}
 	
 }
