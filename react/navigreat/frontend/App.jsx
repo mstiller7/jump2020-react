@@ -16,7 +16,7 @@ import { useOvermind } from "./overmind/config";
 const Stack = createStackNavigator();
 
 export default function App() {
-  const { state, actions, effects, reaction } = useOvermind();
+  // const { state, actions, effects, reaction } = useOvermind();
 
   return (
     <NavigationContainer>
