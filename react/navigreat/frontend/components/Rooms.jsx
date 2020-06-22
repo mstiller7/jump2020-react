@@ -11,10 +11,11 @@ import {
   Thumbnail,
 } from "native-base";
 import { useOvermind } from "../overmind/config";
+import { Button } from "react-native-elements";
 
 export default function Rooms() {
   const { state, actions } = useOvermind();
-  
+
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
   useEffect(() => {
@@ -51,6 +52,10 @@ export default function Rooms() {
     // TODO
   };
 
+  const handleNavigate = async (id) => {
+    // TODO
+  };
+
   return (
     <Container>
       {/* <Header /> */}
@@ -71,10 +76,12 @@ export default function Rooms() {
               </CardItem>
               <CardItem cardBody>
                 <Image
-                  source="https://i.imgur.com/PYVEDqI.jpg"
-                  // source={{ uri: `data:image/;base64,${room.image}` }}
+                  source={{ uri: `data:image/;base64,${room.image}` }}
                   style={{ height: 200, width: null, flex: 1 }}
                 />
+              </CardItem>
+              <CardItem>
+                <Button title="View" onPress={() => handleNavigate(room.id)} />
               </CardItem>
             </Card>
           );

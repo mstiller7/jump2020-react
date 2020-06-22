@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "react-native";
 import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";
+import * as DocumentPicker from "expo-document-picker";
 
 export default function Rooms() {
   const { actions } = useOvermind();
@@ -17,11 +18,40 @@ export default function Rooms() {
   };
 
   const handleSelect = async () => {
-    payload.image = await actions.pickImage();
+    try {
+      const image = await DocumentPicker.getDocumentAsync({
+        type: "image/*",
+      });
+      // payload.image = image;
+      payload.image = await handleUpload(image);
+    } catch (err) {
+      throw err;
+    }
   };
 
-  const handleUpload = async () => {
-    payload.image = await actions.uploadImage();
+  /**
+   * Makes a POST request to the webserver containing the file.
+   * @param image File to be sent.
+   * @return {Promise<String>} The MongoDB ID String of the uploaded file object.
+   */
+  const handleUpload = async (image) => {
+    var data = new FormData();
+    data.append("title", image.name);
+
+    var result = "";
+
+    await fetch(image.uri)
+      .then((res) => {
+        return res.blob();
+      })
+      .then((blob) => {
+        data.append("image", blob, image.name);
+        console.log(data);
+        actions.post(data).then((response) => {
+          result = response.data;
+        });
+      });
+    return result;
   };
 
   // const enabled = payload.image.length > 10;
@@ -61,7 +91,7 @@ export default function Rooms() {
             />
           </Item>
           <Button title="Select Image" onPress={handleSelect} />
-          <Button title="Confirm Upload" onPress={handleUpload} />
+          <Button title="Confirm Upload" disabled onPress={handleUpload} />
           <Button
             title="Submit"
             // disabled={!enabled}
