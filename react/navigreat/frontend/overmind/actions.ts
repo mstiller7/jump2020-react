@@ -1,4 +1,4 @@
-export { default as http } from "axios";
+// export { default as http } from "axios";
 import axios from "axios";
 
 // TODO remove later on when not in dev
@@ -7,10 +7,18 @@ const server = "http://localhost:8080/api";
 /**
  * Makes a GET request to obtain the current list of rooms.
  */
-export const refreshRooms = async ({ state }) => {
-  await axios.get(`${server}/rooms`).then((response) => {
-    state.rooms = response.data;
+export const refreshRooms = async ({ state, actions }) => {
+  state.rooms = await axios.get(`${server}/rooms`).then((response) => {
+    return response.data;
   });
+
+  var rooms = state.rooms.map((r) => ({ ...r }));
+  for (const room of rooms) {
+    await actions.getImage(room.image).then((response) => {
+      room.image = response.data;
+    });
+  }
+  state.rooms = rooms;
 };
 
 /**
@@ -30,7 +38,7 @@ export const postRoom = async ({ state, actions }, payload) => {
     });
 };
 
-export const post = async (payload) => {
+export const post = async ({}, payload) => {
   var result;
   console.log(payload);
   axios
@@ -45,19 +53,19 @@ export const post = async (payload) => {
   return result;
 };
 
-// export const getImage = async (id) => {
-//   var img = {
-//     title: "",
-//     data: "",
-//   };
+// even though the state isn't used here, the first param is Overmind.
+export const getImage = async ({}, id: String) => {
+  var img = {
+    title: "",
+    data: "",
+  };
 
-//   await axios
-//     .get(`${this.server}/images/${id}`)
-//     .then((response) => {
-//       img.title = response.data.title;
-//       img.data = response.data.image.data;
-//     })
-//     .catch((error) => console.log(error));
+  await axios.get(`${server}/images/${id}`).then((response) => {
+    img.title = response.data.title;
+    img.data = response.data.image.data;
+  });
+  // console.log(img);
+  // .catch((error) => console.log(error));
 
-//   return img;
-// };
+  return img;
+};
