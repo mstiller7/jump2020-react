@@ -17,44 +17,33 @@ export default function Rooms() {
     image: null,
   };
 
+  /**
+   *
+   */
   const handleSelect = async () => {
-    try {
-      const image = await DocumentPicker.getDocumentAsync({
-        type: "image/*",
-      });
-      // payload.image = image;
-      payload.image = await handleUpload(image);
-    } catch (err) {
-      throw err;
-    }
+    payload.image = await DocumentPicker.getDocumentAsync({
+      type: "image/*",
+    });
   };
 
   /**
    * Makes a POST request to the webserver containing the file.
-   * @param image File to be sent.
    * @return {Promise<String>} The MongoDB ID String of the uploaded file object.
    */
-  const handleUpload = async (image) => {
+  const handleUpload = async () => {
+    var img = payload.image;
     var data = new FormData();
-    data.append("title", image.name);
+    data.append("title", img.name);
 
-    var result = "";
+    var blob = await fetch(img.uri).then((res) => {
+      return res.blob();
+    });
+    data.append("image", blob, img.name);
 
-    await fetch(image.uri)
-      .then((res) => {
-        return res.blob();
-      })
-      .then((blob) => {
-        data.append("image", blob, image.name);
-        console.log(data);
-        actions.post(data).then((response) => {
-          result = response.data;
-        });
-      });
-    return result;
+    payload.image = await actions.postImage(data).then((response) => {
+      return response.data;
+    });
   };
-
-  // const enabled = payload.image.length > 10;
 
   return (
     <Container>
@@ -91,12 +80,8 @@ export default function Rooms() {
             />
           </Item>
           <Button title="Select Image" onPress={handleSelect} />
-          <Button title="Confirm Upload" disabled onPress={handleUpload} />
-          <Button
-            title="Submit"
-            // disabled={!enabled}
-            onPress={() => actions.postRoom(payload)}
-          />
+          <Button title="Confirm Upload" onPress={handleUpload} />
+          <Button title="Submit" onPress={() => actions.postRoom(payload)} />
         </Form>
       </Content>
     </Container>

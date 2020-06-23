@@ -1,8 +1,0 @@
-# GET http://localhost:8080/rooms
-
-POST http://localhost:8080/rooms
-content-type: application/json
-
-{
-    "name": "office-assistant"
-}

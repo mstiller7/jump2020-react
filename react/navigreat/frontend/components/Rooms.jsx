@@ -19,23 +19,7 @@ export default function Rooms() {
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
   useEffect(() => {
-    actions
-      .refreshRooms()
-      // .then(() => {
-      //   for (var i in state.rooms) {
-      //     var room = state.rooms[i];
-      //     actions.getImage(room.image).then((data) => {
-      //       room.image = data.data;
-      //     });
-      //     state.rooms[i] = room;
-      //   }
-      // })
-      // .catch((error) => console.log(error));
-
-    // const getImages = async () => {
-
-    // };
-    // getImages();
+    actions.refreshRooms();
   }, []);
   // ? the empty array here ensures the component
   // ? doesn't continually re-render.
@@ -47,21 +31,22 @@ export default function Rooms() {
       "font-weight": "bold",
     },
   };
-  
+
   const handleNavigate = async (id) => {
     // TODO
   };
 
   return (
     <Container>
-      {/* <Header /> */}
       <Content>
         {state.rooms.map((room, i) => {
           return (
             <Card key={i}>
               <CardItem>
                 <Left>
-                  <Thumbnail source="https://i.imgur.com/PYVEDqI.jpg" />
+                  <Thumbnail
+                    source={{ uri: `data:image/;base64,${room.image}` }}
+                  />
                   <Body>
                     <Text style={styles.title}>{room.title}</Text>
                     <Text note>
