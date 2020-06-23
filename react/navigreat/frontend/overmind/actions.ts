@@ -26,17 +26,15 @@ export const refreshRooms = async ({ state, actions }) => {
  * @param payload JSON-formatted room object.
  */
 export const postRoom = async ({ state, actions }, payload) => {
-  console.log("Payload: ", payload);
-  await axios
-    .post(`${server}/rooms`, payload)
-    .then((res) => {
-      // TODO something useful with a successful response.
-      actions.refreshRooms();
-    })
-    .catch((err) => {
-      // TODO something useful with any error.
-      console.log(err);
-    });
+  // console.log("Payload: ", payload);
+  await axios.post(`${server}/rooms`, payload).then(() => {
+    // TODO something useful with a successful response.
+    actions.refreshRooms();
+  });
+  // .catch((err) => {
+  // TODO something useful with any error.
+  // console.log(err);
+  // });
 };
 
 export const postImage = async ({}, payload) => {
@@ -45,9 +43,9 @@ export const postImage = async ({}, payload) => {
     .then((response) => {
       // TODO alert the user of successful upload.
       return response;
-    })
-    // TODO do something useful with the error.
-    .catch((err) => console.log(err));
+    });
+  // TODO do something useful with the error.
+  // .catch((err) => console.log(err));
   return result;
 };
 
