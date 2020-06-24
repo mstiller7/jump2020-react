@@ -1,4 +1,5 @@
 import axios from "axios";
+import { state } from "./state";
 
 // TODO remove later on when not in dev
 const server = "http://localhost:8080/api";

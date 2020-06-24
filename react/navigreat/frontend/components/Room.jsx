@@ -1,14 +1,16 @@
 import React from "react";
 import { useOvermind } from "../overmind/config";
-import { Container, Content, CardItem, View, Text } from "native-base";
+import { Container, Content, CardItem, Text } from "native-base";
 import { Card } from "react-native-elements";
 import { Image } from "react-native";
 
-export default function Room() {
+export default function Room({ route }) {
   const { state } = useOvermind();
   // TODO neaten up etc.
 
-  const room = state.room;
+  const { id } = route.params;
+  const room = state.rooms[id];
+  console.log(room);
 
   const styles = {
     summary: {
@@ -35,7 +37,7 @@ export default function Room() {
           </CardItem>
           <CardItem>
             {/* TODO figure out why Image not binding. */}
-            <Image source={room.image} />
+            <Image source={{ uri: `data:image/;base64,${room.image}` }} />
           </CardItem>
           <CardItem cardBody>
             <Text style={styles.supplement}>The image should be ^ here.</Text>

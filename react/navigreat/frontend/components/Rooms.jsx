@@ -33,9 +33,8 @@ export default function Rooms({ navigation }) {
   };
 
   const handleNavigate = (id) => {
-    actions.getRoom(id).then(() => {
-      navigation.navigate("Room");
-    });
+    // actions.setRoom(id);
+    navigation.navigate("Room", { id: id });
   };
 
   return (
@@ -64,7 +63,7 @@ export default function Rooms({ navigation }) {
                 />
               </CardItem>
               <CardItem>
-                <Button title="View" onPress={() => handleNavigate(room.id)} />
+                <Button title="View" onPress={() => handleNavigate(i)} />
               </CardItem>
             </Card>
           );
