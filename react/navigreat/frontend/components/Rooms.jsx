@@ -13,13 +13,13 @@ import {
 import { useOvermind } from "../overmind/config";
 import { Button } from "react-native-elements";
 
-export default function Rooms() {
+export default function Rooms({ navigation }) {
   const { state, actions } = useOvermind();
 
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
   useEffect(() => {
-    actions.refreshRooms();
+    actions.refreshRooms().then(() => actions.assignImages());
   }, []);
   // ? the empty array here ensures the component
   // ? doesn't continually re-render.
@@ -32,8 +32,10 @@ export default function Rooms() {
     },
   };
 
-  const handleNavigate = async (id) => {
-    // TODO
+  const handleNavigate = (id) => {
+    actions.getRoom(id).then(() => {
+      navigation.navigate("Room");
+    });
   };
 
   return (

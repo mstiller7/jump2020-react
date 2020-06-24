@@ -4,8 +4,11 @@ import { Container, Content } from "native-base";
 import { Card } from "react-native-elements";
 import { Image } from "react-native";
 
-export default function Room(room) {
-  const { actions } = useOvermind();
+export default function Room() {
+  const { state, actions } = useOvermind();
+  // TODO neaten up etc.
+  
+  const room = state.room;
 
   return (
     <Container>

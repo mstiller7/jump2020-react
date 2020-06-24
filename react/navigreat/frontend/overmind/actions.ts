@@ -1,4 +1,3 @@
-// export { default as http } from "axios";
 import axios from "axios";
 
 // TODO remove later on when not in dev
@@ -7,11 +6,27 @@ const server = "http://localhost:8080/api";
 /**
  * Makes a GET request to obtain the current list of rooms.
  */
-export const refreshRooms = async ({ state, actions }) => {
+export const refreshRooms = async ({ state }) => {
   state.rooms = await axios.get(`${server}/rooms`).then((response) => {
     return response.data;
   });
+};
 
+/**
+ * Requests a specific room from the webserver.
+ * @param {String} id The room ID to request.
+ */
+export const getRoom = async ({ state }, id: String) => {
+  state.room = await axios.get(`${server}/rooms/${id}`).then((response) => {
+    return response.data;
+  });
+};
+
+/**
+ * Iterates through the rooms in the state,
+ * assigning the retrieved images to each.
+ */
+export const assignImages = async ({ state, actions }) => {
   var rooms = state.rooms.map((r) => ({ ...r }));
   for (const room of rooms) {
     await actions.getImage(room.image).then((response) => {
@@ -25,31 +40,31 @@ export const refreshRooms = async ({ state, actions }) => {
  * Makes a POST request to the webserver with a room object.
  * @param payload JSON-formatted room object.
  */
-export const postRoom = async ({ state, actions }, payload) => {
-  // console.log("Payload: ", payload);
+export const postRoom = async ({ actions }, payload) => {
   await axios.post(`${server}/rooms`, payload).then(() => {
     // TODO something useful with a successful response.
     actions.refreshRooms();
   });
-  // .catch((err) => {
-  // TODO something useful with any error.
-  // console.log(err);
-  // });
 };
 
-export const postImage = async ({}, payload) => {
+/**
+ * Makes a POST request to the Spring Boot backend.
+ * @param {FormData} payload The image file to be POSTed.
+ */
+export const postImage = async ({}, payload: FormData) => {
   var result = await axios
     .post(`${server}/images`, payload)
     .then((response) => {
       // TODO alert the user of successful upload.
       return response;
     });
-  // TODO do something useful with the error.
-  // .catch((err) => console.log(err));
   return result;
 };
 
-// even though the state isn't used here, the first param is Overmind.
+/**
+ * Retrieves an image from the Spring Boot backend application.
+ * @param id The String ID of an image to retrieve.
+ */
 export const getImage = async ({}, id: String) => {
   var img = {
     title: "",
@@ -60,8 +75,6 @@ export const getImage = async ({}, id: String) => {
     img.title = response.data.title;
     img.data = response.data.image.data;
   });
-  // console.log(img);
-  // .catch((error) => console.log(error));
 
   return img;
 };

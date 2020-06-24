@@ -11,6 +11,7 @@ import Create from "./components/Create";
 
 // ? Setup Overmind
 import { useOvermind } from "./overmind/config";
+import Room from "./components/Room";
 
 // ? Construct UI
 const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="Rooms" component={Rooms} />
         <Stack.Screen name="Create" component={Create} />
+        <Stack.Screen name="Room" component={Room} />
       </Stack.Navigator>
     </NavigationContainer>
   );

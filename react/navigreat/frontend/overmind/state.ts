@@ -3,6 +3,7 @@ type State = {
   user: string;
   rooms: Array<Room>;
   file: any;
+  room: Room;
 };
 
 type Room = {
@@ -20,4 +21,5 @@ export const state: State = {
   user: "Guest",
   rooms: [],
   file: null,
+  room: null,
 };
