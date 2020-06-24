@@ -21,6 +21,11 @@ public class RoomService {
 		return repo.findAll();
 	}
 	
+	@GetMapping("/rooms/{id}")
+	public Room getRoom(@PathVariable String id) {
+		return repo.findById(id).get();
+	}
+	
 	//	takes a JSON string
 	@PostMapping("/rooms")
 	public String addRoom(@RequestBody String payload) {
