@@ -33,9 +33,9 @@ export default function Rooms({ navigation }) {
   };
 
   const handleNavigate = (id) => {
-    // actions.setRoom(id);
     navigation.navigate("Room", { id: id });
   };
+  
 
   return (
     <Container>

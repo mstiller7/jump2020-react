@@ -24,6 +24,8 @@ export default function Room({ route }) {
     },
   };
 
+  function Edit(props) {}
+
   return (
     <Container>
       <Content>
@@ -36,8 +38,10 @@ export default function Room({ route }) {
             </Text>
           </CardItem>
           <CardItem>
-            {/* TODO figure out why Image not binding. */}
-            <Image source={{ uri: `data:image/;base64,${room.image}` }} />
+            <Image
+              style={{ height: 200, width: null, flex: 1 }}
+              source={{ uri: `data:image/;base64,${room.image}` }}
+            />
           </CardItem>
           <CardItem cardBody>
             <Text style={styles.supplement}>The image should be ^ here.</Text>

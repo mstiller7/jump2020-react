@@ -5,8 +5,8 @@ import { Input } from "react-native-elements";
 import { Container, Content, Form, Item } from "native-base";
 import * as DocumentPicker from "expo-document-picker";
 
-export default function Rooms() {
-  const { actions } = useOvermind();
+export default function Rooms({ navigation }) {
+  const { state, actions } = useOvermind();
 
   const payload = {
     title: "",
@@ -44,6 +44,8 @@ export default function Rooms() {
       return response.data;
     });
   };
+  
+  // TODO reset fields button
 
   return (
     <Container>
@@ -81,7 +83,18 @@ export default function Rooms() {
           </Item>
           <Button title="Select Image" onPress={handleSelect} />
           <Button title="Confirm Upload" onPress={handleUpload} />
-          <Button title="Submit" onPress={() => actions.postRoom(payload)} />
+          <Button
+            title="Submit"
+            onPress={() =>
+              actions.postRoom(payload).then(() =>
+                actions.refreshRooms().then(() => {
+                  actions.assignImages().then(() => {
+                    navigation.navigate("Room", { id: state.rooms.length - 1 });
+                  });
+                })
+              )
+            }
+          />
         </Form>
       </Content>
     </Container>
