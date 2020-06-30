@@ -31,6 +31,9 @@ export default function Room({ route }) {
       <Content>
         <Card title={room.title}>
           <CardItem cardBody>
+            <Text>
+              
+            </Text>
             <Text style={styles.summary}>
               This is where the summary of a room would appear.
               <br />
@@ -39,7 +42,7 @@ export default function Room({ route }) {
           </CardItem>
           <CardItem>
             <Image
-              style={{ height: 200, width: null, flex: 1 }}
+              style={{ height: 500, width: null, flex: 1 }}
               source={{ uri: `data:image/;base64,${room.image}` }}
             />
           </CardItem>
