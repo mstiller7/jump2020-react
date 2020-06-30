@@ -79,3 +79,11 @@ export const getImage = async ({}, id: String) => {
 
   return img;
 };
+
+
+export const updateSearch = ({state}, value) => {
+  
+  state.search = value;
+  return state.search;
+  
+}
