@@ -11,10 +11,12 @@ import {
   Thumbnail,
 } from "native-base";
 import { useOvermind } from "../overmind/config";
-import { Button } from "react-native-elements";
+import { Button, SearchBar } from "react-native-elements";
 
 export default function Rooms({ navigation }) {
   const { state, actions } = useOvermind();
+
+  const { search } = state;
 
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
@@ -24,6 +26,10 @@ export default function Rooms({ navigation }) {
   // ? the empty array here ensures the component
   // ? doesn't continually re-render.
   // TODO add a refresh button?
+
+  // const screen = {
+  //   search: "",
+  // };
 
   const styles = {
     title: {
@@ -35,11 +41,25 @@ export default function Rooms({ navigation }) {
   const handleNavigate = (id) => {
     navigation.navigate("Room", { id: id });
   };
-  
+
+  const handleSearch = (value) => {
+    // TODO search bar for rooms display
+    actions.updateSearch(value)
+    // console.log("Value:", value);
+    // console.log("Screen.search:", screen.search);
+  };
+
+  const uiSearch = React.useRef(null);
 
   return (
     <Container>
       <Content>
+        <SearchBar
+          ref={uiSearch}
+          placeholder="Type Here..."
+          onChangeText={(value) => handleSearch(value)}
+          value={search}
+        />
         {state.rooms.map((room, i) => {
           return (
             <Card key={i}>
