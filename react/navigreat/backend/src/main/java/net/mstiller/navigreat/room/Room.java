@@ -20,6 +20,9 @@ public class Room {
 	public String image;
 	
 	@Field
+	public String summary;
+	
+	@Field
 	public String building;
 	
 	@Field
@@ -56,6 +59,7 @@ public class Room {
 		"id='" + id + '\'' +
 		", title='" + title + '\'' +
 		", image='" + image + '\'' +
+		", summary='" + summary + '\'' +
 		", building='" + building + '\'' +
 		", floor=" + floor +
 		", number=" + number +
