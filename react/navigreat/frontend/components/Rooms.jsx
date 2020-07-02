@@ -18,10 +18,16 @@ export default function Rooms({ navigation }) {
 
   const { search } = state;
 
+  // var filtered = [];
+
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
   useEffect(() => {
-    actions.refreshRooms().then(() => actions.assignImages());
+    actions.refreshRooms().then(() => {
+      actions.assignImages();
+      // filtered = state.rooms.find((room) => room.title.includes(state.search));
+      // console.log("Filtered rooms:", filtered);
+    });
   }, []);
   // ? the empty array here ensures the component
   // ? doesn't continually re-render.
@@ -44,7 +50,7 @@ export default function Rooms({ navigation }) {
 
   const handleSearch = (value) => {
     // TODO search bar for rooms display
-    actions.updateSearch(value)
+    actions.updateSearch(value);
     // console.log("Value:", value);
     // console.log("Screen.search:", screen.search);
   };
@@ -56,7 +62,7 @@ export default function Rooms({ navigation }) {
       <Content>
         <SearchBar
           ref={uiSearch}
-          placeholder="Type Here..."
+          placeholder="Search..."
           onChangeText={(value) => handleSearch(value)}
           value={search}
         />

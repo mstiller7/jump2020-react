@@ -80,10 +80,11 @@ export const getImage = async ({}, id: String) => {
   return img;
 };
 
-
-export const updateSearch = ({state}, value) => {
-  
+export const updateSearch = ({ state }, value) => {
   state.search = value;
+
+  var filtered = state.rooms.find((room) => room.title.includes(state.search));
+  console.log("Filtered rooms:", filtered);
+
   return state.search;
-  
-}
+};
