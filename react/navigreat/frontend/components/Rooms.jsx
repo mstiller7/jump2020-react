@@ -15,10 +15,8 @@ import { Button, SearchBar } from "react-native-elements";
 
 export default function Rooms({ navigation }) {
   const { state, actions } = useOvermind();
-
+  // Extract the search value from Overmind state.
   const { search } = state;
-
-  // var filtered = [];
 
   // a Hook to replace `componentDidMount()`.
   // TODO add caching so a refresh doesn't necessarily need to occur.
@@ -33,13 +31,8 @@ export default function Rooms({ navigation }) {
   // ? doesn't continually re-render.
   // TODO add a refresh button?
 
-  // const screen = {
-  //   search: "",
-  // };
-
   const styles = {
     title: {
-      // "font-size": "xx-large",
       "font-weight": "bold",
     },
   };
