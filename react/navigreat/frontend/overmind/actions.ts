@@ -4,6 +4,10 @@ import { state } from "./state";
 // TODO remove later on when not in dev
 const server = "http://localhost:8080/api";
 
+export const pushPayload = ({ state }, payload) => {
+  state.payload = payload;
+};
+
 /**
  * Makes a GET request to obtain the current list of rooms.
  */
@@ -72,10 +76,15 @@ export const getImage = async ({}, id: String) => {
     data: "",
   };
 
-  await axios.get(`${server}/images/${id}`).then((response) => {
-    img.title = response.data.title;
-    img.data = response.data.image.data;
-  });
+  await axios
+    .get(`${server}/images/${id}`)
+    .then((response) => {
+      img.title = response.data.title;
+      img.data = response.data.image.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   return img;
 };
