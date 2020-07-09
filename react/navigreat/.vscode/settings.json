@@ -1,3 +1,12 @@
 {
-  "java.configuration.updateBuildConfiguration": "disabled"
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "files.exclude": {
+    "**/__tests__/": true,
+    "**/.expo/": true,
+    "**/android/": true,
+    "**/ios/": true,
+    "**/native-base-theme/": true,
+    "**/node-modules/": true,
+    "**/web-build/": true,
+  }
 }
