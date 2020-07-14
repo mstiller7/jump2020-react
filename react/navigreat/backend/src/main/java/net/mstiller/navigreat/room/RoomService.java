@@ -30,7 +30,7 @@ public class RoomService {
 	@PostMapping("/rooms")
 	public String addRoom(@RequestBody String payload) {
 		Room room = new Gson().fromJson(payload, Room.class);
-		return repo.insert(room).getId();
+		return repo.save(room).getId();
 	}
 	
 }
