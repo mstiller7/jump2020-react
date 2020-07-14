@@ -65,7 +65,7 @@ export default function Rooms({ navigation }) {
               <CardItem>
                 <Left>
                   <Thumbnail
-                    source={{ uri: `data:image/;base64,${room.image}` }}
+                    source={{ uri: `data:image/;base64,${room.base64}` }}
                   />
                   <Body>
                     <Text style={styles.title}>{room.title}</Text>
@@ -77,7 +77,7 @@ export default function Rooms({ navigation }) {
               </CardItem>
               <CardItem cardBody>
                 <Image
-                  source={{ uri: `data:image/;base64,${room.image}` }}
+                  source={{ uri: `data:image/;base64,${room.base64}` }}
                   style={{ height: 200, width: null, flex: 1 }}
                 />
               </CardItem>

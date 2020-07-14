@@ -35,7 +35,7 @@ export const assignImages = async ({ state, actions }) => {
   var rooms = state.rooms.map((r) => ({ ...r }));
   for (const room of rooms) {
     await actions.getImage(room.image).then((response) => {
-      room.image = response.data;
+      room.base64 = response.data;
     });
   }
   state.rooms = rooms;
