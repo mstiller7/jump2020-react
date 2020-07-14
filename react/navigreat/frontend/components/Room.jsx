@@ -7,12 +7,11 @@ import { Button } from "react-native";
 import { Image } from "react-native";
 
 export default function Room({ route }) {
-  const { state } = useOvermind();
+  const { state, actions } = useOvermind();
   // TODO neaten up etc.
 
   const { id } = route.params;
   const room = state.rooms[id];
-  console.log(room);
 
   const styles = {
     summary: {
@@ -26,17 +25,25 @@ export default function Room({ route }) {
     },
   };
 
-  const payload = {};
+  // ? We again begin with the payload structure.
+  const payload = {
+    id: room.id,
+    title: room.title,
+    summary: "",
+    building: room.building,
+    floor: room.floor,
+    number: room.number,
+    capacity: room.capacity,
+    image: room.image,
+  };
 
+  // TODO the toggling of the child state between edit mode.
   function Edit(props) {}
 
   const handlePATCH = async () => {
-    alert(
-      "Your room update has been sent to the server.\n\
-      This button will PATCH the existing room.\n\
-      Refreshing the page..."
-    );
-    // TODO something with the updated payload
+    actions.postRoom(payload);
+    // TODO replace image base64 payload with the ID ref again
+    // TODO confirmation alert upon success
   };
 
   return (
@@ -66,42 +73,42 @@ export default function Room({ route }) {
           <Item>
             <Input
               placeholder="Title"
-              value={room.title}
+              defaultValue={room.title}
               onChangeText={(text) => (payload.title = text)}
             />
           </Item>
           <Item>
             <Input
               placeholder="Summary"
-              value={room.summary}
+              defaultValue={room.summary}
               onChangeText={(text) => (payload.summary = text)}
             />
           </Item>
           <Item>
             <Input
               placeholder="Building"
-              value={room.building}
+              defaultValue={room.building}
               onChangeText={(text) => (payload.building = text)}
             />
           </Item>
           <Item>
             <Input
               placeholder="Floor"
-              value={room.floor}
+              defaultValue={room.floor}
               onChangeText={(text) => (payload.floor = text)}
             />
           </Item>
           <Item>
             <Input
               placeholder="Number"
-              value={room.number}
+              defaultValue={room.number}
               onChangeText={(text) => (payload.number = text)}
             />
           </Item>
           <Item>
             <Input
               placeholder="Capacity"
-              value={room.capacity}
+              defaultValue={room.capacity}
               onChangeText={(text) => (payload.capacity = text)}
             />
           </Item>
