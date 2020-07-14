@@ -17,7 +17,6 @@ export default function Rooms({ navigation }) {
     number: "",
     capacity: "",
     image: null,
-    base64: null,
   };
 
   /**

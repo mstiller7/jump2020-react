@@ -5,6 +5,7 @@ import { Card, Input } from "react-native-elements";
 import { Button } from "react-native";
 
 import { Image } from "react-native";
+import { useEffect } from "react";
 
 export default function Room({ route }) {
   const { state, actions } = useOvermind();
@@ -40,8 +41,12 @@ export default function Room({ route }) {
   // TODO the toggling of the child state between edit mode.
   function Edit(props) {}
 
+  // useEffect(() => {}, [JSON.stringify(room)]);
+
   const handlePATCH = async () => {
     actions.postRoom(payload);
+    // TODO why doesn't the image re-appear?
+    actions.assignImages();
     // TODO replace image base64 payload with the ID ref again
     // TODO confirmation alert upon success
   };
@@ -53,6 +58,8 @@ export default function Room({ route }) {
           <CardItem cardBody>
             <Text></Text>
             <Text style={styles.summary}>
+              {room.summary}
+              <br />
               This is where the summary of a room would appear.
               <br />
               If it had one...
@@ -61,7 +68,7 @@ export default function Room({ route }) {
           <CardItem>
             <Image
               style={{ height: 500, width: null, flex: 1 }}
-              source={{ uri: `data:image/;base64,${room.image}` }}
+              source={{ uri: `data:image/;base64,${room.base64}` }}
             />
           </CardItem>
           <CardItem cardBody>
