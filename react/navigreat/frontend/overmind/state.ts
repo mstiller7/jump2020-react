@@ -4,4 +4,5 @@ export const state = {
   payload: [],
   file: null,
   search: "",
+  edit: false,
 };

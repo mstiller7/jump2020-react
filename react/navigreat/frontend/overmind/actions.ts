@@ -1,5 +1,4 @@
 import axios from "axios";
-import { state } from "./state";
 
 // TODO remove later on when not in dev
 const server = "http://localhost:8080/api";
@@ -96,4 +95,9 @@ export const updateSearch = ({ state }, value) => {
   console.log("Filtered rooms:", filtered);
 
   return state.search;
+};
+
+export const toggleEdit = ({ state }) => {
+  state.edit = !state.edit;
+  return state.edit;
 };
