@@ -30,7 +30,7 @@ export default function Room({ route }) {
   const payload = {
     id: room.id,
     title: room.title,
-    summary: "",
+    summary: room.summary,
     building: room.building,
     floor: room.floor,
     number: room.number,
