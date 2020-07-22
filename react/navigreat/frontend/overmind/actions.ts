@@ -48,6 +48,7 @@ export const postRoom = async ({ actions }, payload) => {
   await axios.post(`${server}/rooms`, payload).then(() => {
     // TODO something useful with a successful response.
     actions.refreshRooms();
+    actions.assignImages();
   });
 };
 
