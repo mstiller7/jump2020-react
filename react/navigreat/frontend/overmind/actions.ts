@@ -45,11 +45,9 @@ export const assignImages = async ({ state, actions }) => {
  * @param payload JSON-formatted room object.
  */
 export const postRoom = async ({ actions }, payload) => {
-  await axios.post(`${server}/rooms`, payload).then(() => {
-    // TODO something useful with a successful response.
-    actions.refreshRooms();
-    actions.assignImages();
-  });
+  await axios.post(`${server}/rooms`, payload);
+  await actions.refreshRooms();
+  await actions.assignImages();
 };
 
 /**
