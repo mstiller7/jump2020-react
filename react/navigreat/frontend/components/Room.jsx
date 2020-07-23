@@ -37,17 +37,10 @@ export default function Room({ route }) {
     capacity: room.capacity,
     image: room.image,
   };
-  
-  useEffect(() => {}, [state.edit]);
 
-  const handlePATCH = async () => {
-    actions.postRoom(payload);
-    actions.refreshRooms();
-    // TODO why doesn't the image re-appear?
-    // TODO on subsequent refreshes, the summary isn't saved
-    // actions.assignImages();
+  const handleUpdate = async () => {
+    await actions.postRoom(payload);
     actions.toggleEdit();
-    // TODO replace image base64 payload with the ID ref again
     // TODO confirmation alert upon success
   };
 
@@ -59,22 +52,13 @@ export default function Room({ route }) {
           <Card title={room.title}>
             <CardItem cardBody>
               <Text></Text>
-              <Text style={styles.summary}>
-                {room.summary}
-                <br />
-                This is where the summary of a room would appear.
-                <br />
-                If it had one...
-              </Text>
+              <Text style={styles.summary}>{room.summary}</Text>
             </CardItem>
             <CardItem>
               <Image
                 style={{ height: 500, width: null, flex: 1 }}
                 source={{ uri: `data:image/;base64,${room.base64}` }}
               />
-            </CardItem>
-            <CardItem cardBody>
-              <Text style={styles.supplement}>The image should be ^ here.</Text>
             </CardItem>
           </Card>
         </Content>
@@ -127,7 +111,7 @@ export default function Room({ route }) {
                 onChangeText={(text) => (payload.capacity = text)}
               />
             </Item>
-            <Button title="Confirm Update" onPress={handlePATCH} />
+            <Button title="Confirm Update" onPress={handleUpdate} />
           </Form>
         </Content>
       </Container>
