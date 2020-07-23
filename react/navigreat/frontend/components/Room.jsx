@@ -16,9 +16,9 @@ export default function Room({ route }) {
 
   const styles = {
     summary: {
-      color: "blue",
-      fontSize: 32,
-      fontFamily: "Arial, Helvetica, sans-serif",
+      color: "#00ccff",
+      fontSize: 20,
+      fontFamily: "Segoe UI, Helvetica, sans-serif",
     },
     supplement: {
       color: "purple",
@@ -56,7 +56,7 @@ export default function Room({ route }) {
             </CardItem>
             <CardItem>
               <Image
-                style={{ height: 500, width: null, flex: 1 }}
+                style={{ height: 400, width: null, flex: 1 }}
                 source={{ uri: `data:image/;base64,${room.base64}` }}
               />
             </CardItem>
@@ -68,6 +68,11 @@ export default function Room({ route }) {
     return (
       <Container>
         <Content>
+          <Button
+            title="Cancel"
+            onPress={actions.toggleEdit}
+            color="#cc0000"
+          />
           <Form>
             <Item>
               <Input
