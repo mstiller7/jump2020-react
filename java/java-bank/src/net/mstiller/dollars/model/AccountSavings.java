@@ -1,4 +1,7 @@
 package net.mstiller.dollars.model;
 
-public class AccountSavings {
+public class AccountSavings extends Account {
+
+	
+
 }
