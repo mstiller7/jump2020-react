@@ -1,14 +1,15 @@
 package net.mstiller.dollars.app;
 
-import net.mstiller.dollars.util.Console;
-
-import static net.mstiller.dollars.util.Colors.*;
+import net.mstiller.dollars.controller.DollarsBankController;
 
 public class DollarsBankApplication {
 	
+	private static DollarsBankController controller;
+	
 	public static void main(String[] args) {
 		
-		Console.printWelcome();
+		controller = new DollarsBankController();
+		controller.init();
 		
 	}
 	
