@@ -37,9 +37,25 @@ public class Console {
 		paintLine(ANSI_BLUE, "+ ----------------------------- +");
 	}
 	
-	public static int getChoice() {
-		return stdin.nextInt();
+	public static int getInt(String prompt) {
+		System.out.println(prompt);
+		try {
+			return Integer.parseInt(stdin.nextLine());
+		} catch (Exception e) {
+			System.out.println("Invalid input.");
+			return getInt(prompt);
+		}
 	}
 	
+	public static String getString(String prompt) {
+		System.out.println(prompt);
+		try {
+			return stdin.nextLine();
+		} catch (Exception e) {
+			System.out.println("Invalid input.");
+			return getString(prompt);
+		}
+		
+	}
 	
 }
