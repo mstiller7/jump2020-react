@@ -28,7 +28,7 @@ public class Console {
 		System.out.println("1. Create New Account");
 		System.out.println("2. Login");
 		System.out.println("3. Exit");
-		paintLine(ANSI_GREEN, "Enter Choice (1, 2, or 3):");
+		paint(ANSI_GREEN, "Enter Choice (1, 2, or 3):");
 	}
 	
 	public static void splashNewAccount() {
