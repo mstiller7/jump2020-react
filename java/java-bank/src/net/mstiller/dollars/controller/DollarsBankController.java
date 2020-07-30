@@ -4,6 +4,8 @@ import net.mstiller.dollars.model.Account;
 import net.mstiller.dollars.model.Customer;
 import net.mstiller.dollars.util.Console;
 
+import static net.mstiller.dollars.util.Colors.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -73,6 +75,7 @@ public class DollarsBankController {
 	}
 	
 	public void exit() {
+		Console.paintLine(ANSI_RED, "Thank you for using DollarsBank! Closing.");
 		System.exit(0);
 	}
 	
