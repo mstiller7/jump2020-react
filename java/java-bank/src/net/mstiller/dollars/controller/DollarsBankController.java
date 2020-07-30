@@ -56,8 +56,10 @@ public class DollarsBankController {
 		customers.get(currentCustomer).add(currentAccount);
 		
 		System.out.println("Account added!");
-		System.out.println(currentCustomer);
-		System.out.println(currentAccount);
+		customers.forEach((k, v) -> {
+			System.out.println(k);
+			System.out.println(v);
+		});
 
 //		Clear the values and return to the landing screen.
 		currentCustomer = null;
