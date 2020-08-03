@@ -3,6 +3,7 @@ package net.mstiller.dollars.controller;
 import net.mstiller.dollars.model.Account;
 import net.mstiller.dollars.model.Deposit;
 import net.mstiller.dollars.model.Transaction;
+import net.mstiller.dollars.model.Withdrawal;
 import net.mstiller.dollars.util.Console;
 
 import static net.mstiller.dollars.util.Colors.*;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 public class DollarsBankController {
 	
-	private ArrayList<Account> accounts = new ArrayList<>();
+	private final ArrayList<Account> accounts = new ArrayList<>();
 	private Account user;
 	
 	public void init() {
@@ -48,7 +49,6 @@ public class DollarsBankController {
 		accounts.add(user);
 		
 		System.out.println("Account added!");
-		System.out.println(user);
 
 //		Clear the values and return to the landing screen.
 		user = null;
@@ -105,6 +105,17 @@ public class DollarsBankController {
 	}
 	
 	public void opWithdraw() {
+		
+		int amount = Console.getInt("Enter amount to withdraw:");
+		Transaction t = user.recordTransaction(new Withdrawal(user, amount));
+		if (t.amtStart == t.amtEnd) {
+			Console.paintLine(ANSI_RED, "There was an error, and your transaction has been voided.");
+			Console.paintLine(ANSI_RED, "Please ensure your account has enough balance to cover the withdrawal.");
+		} else {
+			System.out.println("Transaction successful:");
+			System.out.println(user.transactions.get(user.transactions.size()-1));
+		}
+		selection();
 	
 	}
 	
@@ -117,6 +128,7 @@ public class DollarsBankController {
 		for (Transaction t : user.transactions) {
 			System.out.println(t);
 		}
+		selection();
 		
 	}
 	

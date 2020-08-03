@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 	
+	public int amtStart, amtDiff, amtEnd;
 	public String timestamp;
 	
 	public Transaction() {

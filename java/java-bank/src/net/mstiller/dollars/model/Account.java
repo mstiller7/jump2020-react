@@ -20,11 +20,12 @@ public class Account {
 		this.transactions = new ArrayList<>();
 	}
 	
-	public void recordTransaction(Transaction t) {
+	public Transaction recordTransaction(Transaction t) {
 		transactions.add(t);
 		if (transactions.size() > 5) {
 			transactions.remove(0);
 		}
+		return t;
 	}
 	
 	@Override
