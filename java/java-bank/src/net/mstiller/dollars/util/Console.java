@@ -18,6 +18,14 @@ public class Console {
 		paint(color, input);
 		System.out.println();
 	}
+	
+	public static void alert(String prompt) {
+		paintLine(ANSI_RED, prompt);
+	}
+	
+	public static void success(String prompt) {
+		paintLine(ANSI_GREEN, prompt);
+	}
 
 //	Splash helpers.
 	
@@ -54,6 +62,12 @@ public class Console {
 		System.out.println("5. Display Customer Information");
 		System.out.println("6. Sign Out");
 		paint(ANSI_GREEN, "Enter Choice (1-6):");
+	}
+	
+	public static void splashDetails() {
+		paintLine(ANSI_BLUE, "+ ---------------- +");
+		paintLine(ANSI_BLUE, "| Customer Details |");
+		paintLine(ANSI_BLUE, "+ ---------------- +");
 	}
 	
 //	Prompt helpers.
