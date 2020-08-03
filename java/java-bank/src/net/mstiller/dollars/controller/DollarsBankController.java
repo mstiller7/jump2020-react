@@ -28,7 +28,11 @@ public class DollarsBankController {
 		switch (Console.getInt("")) {
 			case 1 -> createAccount();
 			case 2 -> login();
-			default -> exit();
+			case 3 -> exit();
+			default -> {
+				Console.alert("Error. Please retry.");
+				landing();
+			}
 		}
 		
 	}
@@ -48,7 +52,8 @@ public class DollarsBankController {
 		
 		accounts.add(user);
 		
-		System.out.println("Account added!");
+		Console.success("Account added!");
+		System.out.println(accounts);
 
 //		Clear the values and return to the landing screen.
 		user = null;
@@ -67,11 +72,11 @@ public class DollarsBankController {
 			if (a.id.equals(id) && a.password.equals(pw)) {
 				user = a;
 				selection();
-			} else {
-				Console.paintLine(ANSI_RED, "Invalid credentials. Please retry.");
-				login();
 			}
 		}
+//			If we've looped through all users and not found anyone, they don't exist.
+		Console.alert("Invalid credentials. Please retry.");
+		login();
 		
 	}
 	
@@ -79,48 +84,73 @@ public class DollarsBankController {
 		
 		Console.splashLoggedIn();
 		switch (Console.getInt("")) {
-			case 1 -> opDeposit();
-			case 2 -> opWithdraw();
-			case 3 -> opTransfer();
+			case 1 -> {
+				opDeposit();
+				selection();
+			}
+			case 2 -> {
+				opWithdraw();
+				selection();
+			}
+			case 3 -> {
+				opTransfer();
+				selection();
+			}
 			case 4 -> opRecent();
 			case 5 -> opInfo();
 			case 6 -> opLogout();
 //			Invalid choice, re-show screen.
 			default -> {
-				Console.paintLine(ANSI_RED, "Unknown choice.");
+				Console.alert("Unknown choice.");
 				selection();
 			}
 		}
 		
 	}
 	
-	public void opDeposit() {
+	public int opDeposit() {
 		
 		int amount = Console.getInt("Enter amount to deposit:");
-		user.recordTransaction(new Deposit(user, amount));
-		System.out.println("Transaction successful:");
-		System.out.println(user.transactions.get(user.transactions.size()-1));
-		selection();
-	
+		Transaction t = user.recordTransaction(new Deposit(user, amount));
+		if (t.status == Transaction.STATUS.VOID) {
+			Console.alert("There was an error in your deposit amount, and your transaction has been voided.");
+		} else {
+			Console.success("Transaction successful:");
+			Console.success(user.transactions.get(user.transactions.size() - 1).toString());
+		}
+		return t.amtDiff;
+		
 	}
 	
-	public void opWithdraw() {
+	public int opWithdraw() {
 		
 		int amount = Console.getInt("Enter amount to withdraw:");
 		Transaction t = user.recordTransaction(new Withdrawal(user, amount));
-		if (t.amtStart == t.amtEnd) {
-			Console.paintLine(ANSI_RED, "There was an error, and your transaction has been voided.");
-			Console.paintLine(ANSI_RED, "Please ensure your account has enough balance to cover the withdrawal.");
+		if (t.status == Transaction.STATUS.VOID) {
+			Console.alert("There was an error, and your transaction has been voided.");
+			Console.alert("Please ensure your account has enough balance to cover the withdrawal.");
 		} else {
-			System.out.println("Transaction successful:");
-			System.out.println(user.transactions.get(user.transactions.size()-1));
+			Console.success("Transaction successful:");
+			Console.success(user.transactions.get(user.transactions.size() - 1).toString());
 		}
-		selection();
-	
+		return t.amtDiff;
+		
 	}
 	
 	public void opTransfer() {
-	
+		
+		String id = Console.getString("Enter account to transfer to: ");
+		for (Account a : accounts) {
+			if (a.id.equals(id)) {
+				int amount = Console.getInt("Enter amount to transfer to account '" + a.id + "':");
+				Transaction withdrawal = user.recordTransaction(new Withdrawal(user, amount));
+				Transaction deposit = user.recordTransaction(new Deposit(a, withdrawal.amtDiff));
+				return;
+			}
+		}
+		Console.alert("No such account was found. Try again.");
+		
+		
 	}
 	
 	public void opRecent() {
@@ -133,15 +163,23 @@ public class DollarsBankController {
 	}
 	
 	public void opInfo() {
-	
+		
+		Console.splashDetails();
+		System.out.println(user);
+		selection();
+		
 	}
 	
 	public void opLogout() {
-	
+		
+		user = null;
+		Console.alert("You have logged out.");
+		landing();
+		
 	}
 	
 	public void exit() {
-		Console.paintLine(ANSI_RED, "Thank you for using DollarsBank! Closing.");
+		Console.alert("Thank you for using DollarsBank! Closing.");
 		System.exit(0);
 	}
 	
