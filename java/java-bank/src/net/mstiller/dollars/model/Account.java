@@ -30,14 +30,11 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return "Account{" +
-		"name='" + name + '\'' +
-		", address='" + address + '\'' +
-		", phone='" + phone + '\'' +
-		", id=" + id +
-		", password='" + password + '\'' +
-		", balance=" + balance +
-		'}';
+		return "Customer Name: " + name +
+		"\nCustomer Address: " + address +
+		"\nCustomer Contact Number: " + phone +
+		"\nUser ID: " + id +
+		"\nPassword: " + password;
 	}
 	
 }
