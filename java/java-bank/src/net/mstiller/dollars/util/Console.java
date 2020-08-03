@@ -37,6 +37,27 @@ public class Console {
 		paintLine(ANSI_BLUE, "+ ----------------------------- +");
 	}
 	
+	public static void splashLogin() {
+		paintLine(ANSI_BLUE, "+ ------------------- +");
+		paintLine(ANSI_BLUE, "| Enter Login Details |");
+		paintLine(ANSI_BLUE, "+ ------------------- +");
+	}
+	
+	public static void splashLoggedIn() {
+		paintLine(ANSI_BLUE, "+ ------------------------ +");
+		paintLine(ANSI_BLUE, "| Welcome Valued Customer! |");
+		paintLine(ANSI_BLUE, "+ ------------------------ +");
+		System.out.println("1. Deposit Amount");
+		System.out.println("2. Withdraw Amount");
+		System.out.println("3. Funds Transfer");
+		System.out.println("4. View 5 Recent Transactions");
+		System.out.println("5. Display Customer Information");
+		System.out.println("6. Sign Out");
+		paint(ANSI_GREEN, "Enter Choice (1-6):");
+	}
+	
+//	Prompt helpers.
+	
 	public static int getInt(String prompt) {
 		System.out.println(prompt);
 		try {
