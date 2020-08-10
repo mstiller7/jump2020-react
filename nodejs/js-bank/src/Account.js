@@ -11,10 +11,6 @@ export default class Account {
   //   this.pin = pin;
   // }
 
-  getBalance() {
-    return this.balance;
-  }
-
   makeTransaction(amtStart, amtEnd) {
     var today = new Date();
     var date =
@@ -29,23 +25,21 @@ export default class Account {
     this.transactions.push(
       "[" + dateTime + "] Transaction made: $" + amtStart + " -> $" + amtEnd
     );
+    this.balance = amtEnd;
+    return amtEnd;
   }
 
   makeDeposit(amount) {
-    // this.balance += amount;
-    this.makeTransaction(
+    return this.makeTransaction(
       parseInt(this.balance),
-      (parseInt(this.balance) += parseInt(amount))
+      parseInt(this.balance) + parseInt(amount)
     );
-    return this.getBalance();
   }
 
   makeWithdrawal(amount) {
-    // this.balance -= amount;
-    this.makeTransaction(
+    return this.makeTransaction(
       parseInt(this.balance),
-      (parseInt(this.balance) -= parseInt(amount))
+      parseInt(this.balance) - parseInt(amount)
     );
-    return this.getBalance();
   }
 }
