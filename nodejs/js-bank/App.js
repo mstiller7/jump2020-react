@@ -8,7 +8,8 @@ const WARN = clc.yellow.italic;
 const INFO = clc.blue;
 const SUCCESS = clc.greenBright.bold;
 
-var account;
+var accounts = [];
+var acctCurrent;
 
 function init() {
   Menu();
@@ -31,22 +32,116 @@ async function Menu() {
       Login();
       break;
     default:
-      log(ERROR("Unknown entry. Please retry."));
+      log(ERROR("Unknown entry. Please retry.\n"));
       Menu();
   }
 }
 
-function Create() {
-  log("You chose to create a new account.");
+async function Create() {
+  log(WARN("You chose to create a new account.\n"));
+  log(INFO("Enter account name:"));
+  var name = await io.read();
+  log(INFO("Enter account PIN:"));
+  var pin = await io.read();
+  log(INFO("Enter initial deposit:"));
+  var balance = await io.read();
+
+  acctCurrent = new Account(name, pin, balance);
+  accounts.push(acctCurrent);
+  log(SUCCESS("Account successfully created!\n"));
+
+  AccountMenu();
+}
+
+async function Login() {
+  log(WARN("You chose to login.\n"));
+  log(INFO("Enter account name:"));
+  var name = await io.read();
+  log(INFO("Enter account PIN:"));
+  var pin = await io.read();
+
+  for (const account of accounts) {
+    if (account.name.equals(name) && account.pin.equals(pin)) {
+      acctCurrent = account;
+      AccountMenu();
+    }
+  }
+
+  log(ERROR("No such credentials were found. Please retry.\n"));
   Menu();
 }
 
-function Login() {
-  log("You chose to login.");
-  Menu();
+async function AccountMenu() {
+  log(SUCCESS("=== Account Operation Menu ==="));
+  log(INFO("Please enter a numeric choice:"));
+  log("1. Check Balance");
+  log("2. Transaction Record");
+  log("3. Update PIN");
+  log("4. Make Deposit");
+  log("5. Make Withdrawal");
+  log("6. Logout");
+  switch (parseInt(await io.read())) {
+    case 1:
+      log(SUCCESS("Your balance is: $" + acctCurrent.balance + "\n"));
+      AccountMenu();
+      break;
+    case 2:
+      log(SUCCESS("These are the most recent transactions:"));
+      var arr = acctCurrent.transactions;
+      arr.reverse().forEach(function (t) {
+        log(INFO(t));
+      });
+      log("\n");
+      AccountMenu();
+      break;
+    case 3:
+      UpdatePIN();
+      AccountMenu();
+      break;
+    case 4:
+      MakeDeposit();
+      AccountMenu();
+      break;
+    case 5:
+      MakeWithdrawal();
+      AccountMenu();
+      break;
+    case 6:
+      Logout();
+      break;
+    default:
+      log(ERROR("Unknown entry. Please retry.\n"));
+      Menu();
+  }
 }
 
-function Transaction() {}
+async function UpdatePIN() {
+  log(INFO("Enter the new PIN value:"));
+  var pin = await io.read();
+  acctCurrent.pin = pin;
+  log(SUCCESS("The account PIN was successfully updated."));
+}
+
+async function MakeDeposit() {
+  log(INFO("Enter the amount to be deposited:"));
+  var amt = await io.read();
+  var balance = acctCurrent.makeDeposit(amt);
+  log(INFO("Deposit made. New balance: ") + balance);
+}
+
+async function MakeWithdrawal() {
+  log(INFO("Enter the amount to withdraw:"));
+  var amt = await io.read();
+  var balance = acctCurrent.makeWithdrawal(amt);
+  log(INFO("Withdrawal made. New balance: ") + balance);
+}
+
+function Logout() {
+  log(WARN("You chose to logout.\n"));
+  acctCurrent = null;
+  log(SUCCESS("You have logged out. Thank you for visiting."));
+  Menu();
+}
 
 // helper functions.
 

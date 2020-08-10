@@ -1,10 +1,12 @@
 export default class Account {
-  constructor(deposit) {
+  constructor(name, pin, deposit) {
+    this.name = name;
+    this.pin = pin;
     this.balance = 0;
     this.transactions = [];
-    this.makeTransaction(deposit);
+    this.makeDeposit(deposit);
   }
-  
+
   // updatePIN(pin) {
   //   this.pin = pin;
   // }
@@ -31,13 +33,19 @@ export default class Account {
 
   makeDeposit(amount) {
     // this.balance += amount;
-    this.makeTransaction(this.balance, (this.balance += amount));
+    this.makeTransaction(
+      parseInt(this.balance),
+      (parseInt(this.balance) += parseInt(amount))
+    );
     return this.getBalance();
   }
 
   makeWithdrawal(amount) {
     // this.balance -= amount;
-    this.makeTransaction(this.balance, (this.balance -= amount));
+    this.makeTransaction(
+      parseInt(this.balance),
+      (parseInt(this.balance) -= parseInt(amount))
+    );
     return this.getBalance();
   }
 }
