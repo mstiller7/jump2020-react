@@ -20,16 +20,31 @@ init();
 
 async function Menu() {
   log(SUCCESS("DollarsBank ATM welcomes you!"));
-  log(INFO("Please choose:"));
+  log(INFO("Please enter a numeric choice:"));
   log("1. Open Account");
   log("2. Login");
-  var response = await io.read();
-  log(WARN("You entered: ") + response);
+  switch (parseInt(await io.read())) {
+    case 1:
+      Create();
+      break;
+    case 2:
+      Login();
+      break;
+    default:
+      log(ERROR("Unknown entry. Please retry."));
+      Menu();
+  }
 }
 
-function Create() {}
+function Create() {
+  log("You chose to create a new account.");
+  Menu();
+}
 
-function Login() {}
+function Login() {
+  log("You chose to login.");
+  Menu();
+}
 
 function Transaction() {}
 
