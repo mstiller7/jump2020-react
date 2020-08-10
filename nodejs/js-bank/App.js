@@ -1,11 +1,12 @@
+import clc from "cli-color";
+import io from "console-read-write";
+
 import Account from "./src/Account.js";
 
-import clc from "cli-color";
-
-var error = clc.red.bold.italic;
-var warn = clc.yellow.italic;
-var notice = clc.blue.bold;
-var success = clc.greenBright.bold;
+const ERROR = clc.red.bold.italic;
+const WARN = clc.yellow.italic;
+const INFO = clc.blue;
+const SUCCESS = clc.greenBright.bold;
 
 var account;
 
@@ -17,11 +18,13 @@ init();
 
 // procedural functions.
 
-function Menu() {
-  log(success("DollarsBank ATM welcomes you!"));
-  log("Please choose:");
+async function Menu() {
+  log(SUCCESS("DollarsBank ATM welcomes you!"));
+  log(INFO("Please choose:"));
   log("1. Open Account");
   log("2. Login");
+  var response = await io.read();
+  log(WARN("You entered: ") + response);
 }
 
 function Create() {}
