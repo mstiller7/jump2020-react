@@ -12,6 +12,7 @@ var accounts = [];
 var acctCurrent;
 
 function init() {
+  accounts.push(new Account("acct1", "acct1", 400));
   Menu();
 }
 
@@ -61,9 +62,10 @@ async function Login() {
   var pin = await io.read();
 
   for (const account of accounts) {
-    if (account.name.equals(name) && account.pin.equals(pin)) {
+    if (name == account.name && pin == account.pin) {
       acctCurrent = account;
       AccountMenu();
+      return;
     }
   }
 
@@ -88,23 +90,18 @@ async function AccountMenu() {
     case 2:
       log(SUCCESS("These are the most recent transactions:"));
       var arr = acctCurrent.transactions;
-      arr.reverse().forEach(function (t) {
-        log(INFO(t));
-      });
+      arr.reverse().forEach((t) => log(INFO(t)));
       log("\n");
       AccountMenu();
       break;
     case 3:
       UpdatePIN();
-      AccountMenu();
       break;
     case 4:
       MakeDeposit();
-      AccountMenu();
       break;
     case 5:
       MakeWithdrawal();
-      AccountMenu();
       break;
     case 6:
       Logout();
@@ -120,6 +117,7 @@ async function UpdatePIN() {
   var pin = await io.read();
   acctCurrent.pin = pin;
   log(SUCCESS("The account PIN was successfully updated."));
+  AccountMenu();
 }
 
 async function MakeDeposit() {
@@ -127,6 +125,7 @@ async function MakeDeposit() {
   var amt = await io.read();
   var balance = acctCurrent.makeDeposit(amt);
   log(INFO("Deposit made. New balance: ") + balance);
+  AccountMenu();
 }
 
 async function MakeWithdrawal() {
@@ -134,6 +133,7 @@ async function MakeWithdrawal() {
   var amt = await io.read();
   var balance = acctCurrent.makeWithdrawal(amt);
   log(INFO("Withdrawal made. New balance: ") + balance);
+  AccountMenu();
 }
 
 function Logout() {
