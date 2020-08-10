@@ -6,8 +6,6 @@ import net.mstiller.dollars.model.Transaction;
 import net.mstiller.dollars.model.Withdrawal;
 import net.mstiller.dollars.util.Console;
 
-import static net.mstiller.dollars.util.Colors.*;
-
 import java.util.ArrayList;
 
 public class DollarsBankController {

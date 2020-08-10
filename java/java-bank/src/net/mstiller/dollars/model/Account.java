@@ -33,8 +33,8 @@ public class Account {
 		return "Customer Name: " + name +
 		"\nCustomer Address: " + address +
 		"\nCustomer Contact Number: " + phone +
-		"\nUser ID: " + id +
-		"\nPassword: " + password;
+		"\nUser ID: " + id;
+//		"\nPassword: " + password;
 	}
 	
 }
