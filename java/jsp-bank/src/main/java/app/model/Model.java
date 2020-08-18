@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 public class Model {
 	
-	private static Model instance = new Model();
+	private static final Model instance = new Model();
 	
 	private List<Account> model;
 	
-	private static Model getInstance() {
+	public static Model getInstance() {
 		return instance;
 	}
 	
