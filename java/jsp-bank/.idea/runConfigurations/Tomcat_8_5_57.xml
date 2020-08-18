@@ -2,7 +2,7 @@
   <configuration default="false" name="Tomcat 8.5.57" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.57" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
     <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
     <deployment>
-      <artifact name="jsp-bank:war exploded">
+      <artifact name="web">
         <settings>
           <option name="CONTEXT_PATH" value="/" />
         </settings>
@@ -52,7 +52,7 @@
     <method v="2">
       <option name="Make" enabled="true" />
       <option name="BuildArtifacts" enabled="true">
-        <artifact name="jsp-bank:war exploded" />
+        <artifact name="web" />
       </option>
     </method>
   </configuration>
