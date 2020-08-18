@@ -1,6 +1,5 @@
 package app.servlets;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +12,7 @@ public class ServLogin extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/login.jsp");
-		requestDispatcher.forward(req, resp);
+		req.getRequestDispatcher("views/login.jsp").forward(req, resp);
 	}
 	
 }

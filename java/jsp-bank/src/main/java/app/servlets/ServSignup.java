@@ -3,7 +3,6 @@ package app.servlets;
 import app.entities.Account;
 import app.model.Model;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,13 +14,13 @@ import java.io.IOException;
 public class ServSignup extends HttpServlet {
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Model.getInstance().add(new Account(req.getParameter("name"), req.getParameter("pw")));
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("views/signup.jsp").forward(req, resp);
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("views/signup.jsp");
-		requestDispatcher.forward(req, resp);
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+		Model.getInstance().add(new Account(req.getParameter("name"), req.getParameter("pw")));
 	}
+	
 }

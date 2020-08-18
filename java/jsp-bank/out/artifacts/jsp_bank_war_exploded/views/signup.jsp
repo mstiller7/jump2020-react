@@ -8,10 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<link rel="stylesheet" href="styles/w3.css">
+	<link rel="stylesheet" href="../styles/w3.css">
 	<title>DollarsBank // Sign Up</title>
 </head>
-<body>
+
+<body class="w3-light-grey">
+<div class="w3-container w3-blue-grey w3-opacity w3-right-align">
+	<h1>DollarsBank Account Creation</h1>
+</div>
+
 <form method="post">
 	<label>Name:
 		<input type="text" name="name"><br/>
