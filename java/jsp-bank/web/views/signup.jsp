@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-	<link rel="stylesheet" href="../styles/w3.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/w3.css">
 	<title>DollarsBank // Sign Up</title>
 </head>
 
