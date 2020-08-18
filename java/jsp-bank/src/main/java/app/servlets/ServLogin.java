@@ -12,6 +12,7 @@ public class ServLogin extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//		Defines what view should be returned for the user.
 		req.getRequestDispatcher("views/login.jsp").forward(req, resp);
 	}
 	
