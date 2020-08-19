@@ -10,9 +10,9 @@ import java.io.IOException;
 @WebServlet("/login")
 public class ServLogin extends HttpServlet {
 	
+	//	Defines what view should be returned for the user when accessing the page.
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//		Defines what view should be returned for the user.
 		req.getRequestDispatcher("views/login.jsp").forward(req, resp);
 	}
 	

@@ -2,14 +2,19 @@ package app.model;
 
 import app.entities.Account;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Model {
 	
-	private static final Model instance = new Model();
+	private final List<Account> model;
 	
-	private List<Account> model;
+	private Model() {
+		model = new ArrayList<>();
+	}
+	
+	private static final Model instance = new Model();
 	
 	public static Model getInstance() {
 		return instance;
