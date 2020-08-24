@@ -12,9 +12,23 @@
 	<title>DollarsBank // Account Menu</title>
 </head>
 <body class="w3-light-grey">
-<div class="w3-container w3-blue-grey w3-opacity w3-left-align">
-	<h1>DollarsBank // Account Menu</h1>
+<div class="w3-container w3-blue-grey w3-opacity w3-center">
+	<h1>DollarsBank</h1>
+	<h2>Account Menu</h2>
 </div>
-This is the account menu page.
+<div class="w3-container w3-center w3-padding-16">
+	Welcome, ${requestScope.name}!
+</div>
+
+<div>
+	<label for="transactions">Choose an operation:</label>
+	<select name="transactions" id="transactions">
+		<option value="deposit">Deposit</option>
+		<option value="withdraw">Withdraw</option>
+		<option value="transfer">Transfer</option>
+	</select>
+</div>
+
+
 </body>
 </html>

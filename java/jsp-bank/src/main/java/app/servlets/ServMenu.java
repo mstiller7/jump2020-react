@@ -1,5 +1,8 @@
 package app.servlets;
 
+import app.entities.Account;
+import app.model.Model;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +16,14 @@ public class ServMenu extends HttpServlet {
 	//	Defines what view should be returned for the user when accessing the page.
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("views/menu.jsp").forward(req, resp);
+		
+		Account user = Model.getUser();
+//		log(user.getName());
+		req.setAttribute("name", user.getName());
+		req.setAttribute("balance", user.getBalance());
+		
+		req.getRequestDispatcher("/views/menu.jsp").forward(req, resp);
+		
 	}
 	
 }

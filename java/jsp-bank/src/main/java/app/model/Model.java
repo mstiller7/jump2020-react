@@ -3,29 +3,26 @@ package app.model;
 import app.entities.Account;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Model {
 	
-	private final List<Account> model;
+	private static final ArrayList<Account> ACCOUNTS = new ArrayList<>();
+	private static Account user;
 	
-	private Model() {
-		model = new ArrayList<>();
+	public static ArrayList<Account> getAccounts() {
+		return ACCOUNTS;
 	}
 	
-	private static final Model instance = new Model();
-	
-	public static Model getInstance() {
-		return instance;
+	public static void add(Account account) {
+		ACCOUNTS.add(account);
 	}
 	
-	public void add(Account account) {
-		model.add(account);
+	public static Account getUser() {
+		return user;
 	}
 	
-	public List<String> list() {
-		return model.stream().map(Account::getName).collect(Collectors.toList());
+	public static void setUser(Account user) {
+		Model.user = user;
 	}
 	
 }
