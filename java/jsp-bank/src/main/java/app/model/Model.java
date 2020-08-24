@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Model {
 	
-	private static Model instance = new Model();
+	private static Model instance = null;
 	private final ArrayList<Account> ACCOUNTS;
 	private static Account user;
 	
@@ -16,12 +16,16 @@ public class Model {
 		return instance;
 	}
 	
+	//	This static class loads upon server startup,
+	//	enabling data creation like so.
 	private Model() {
 		ACCOUNTS = new ArrayList<>();
 		Account test = new Account("test", "test");
 		add(test);
 		test.recordTransaction(new Deposit(test, 1000));
 	}
+	
+	//	Getters | Setters
 	
 	public ArrayList<Account> getAccounts() {
 		return ACCOUNTS;
