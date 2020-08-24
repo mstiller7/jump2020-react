@@ -23,12 +23,14 @@ public class ServLogin extends HttpServlet {
 	//	Defines what should occur when a POST request is made.
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Model instance = Model.getInstance();
 		String name = req.getParameter("name");
 		String pw = req.getParameter("pw");
-		for (Account account : Model.getAccounts()) {
+		for (Account account : instance.getAccounts()) {
 			if (account.getName().equals(name) && account.getPassword().equals(pw)) {
-				Model.setUser(account);
-				req.getRequestDispatcher("views/menu.jsp").forward(req, resp);
+				instance.setUser(account);
+//				req.getRequestDispatcher("views/menu.jsp").forward(req, resp);
+				resp.sendRedirect("/menu");
 			}
 		}
 		//	TODO display error on invalid account attempt.

@@ -17,8 +17,8 @@ public class ServMenu extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		Account user = Model.getUser();
-//		log(user.getName());
+		Account user = Model.getInstance().getUser();
+		log(user.getName());
 		req.setAttribute("name", user.getName());
 		req.setAttribute("balance", user.getBalance());
 		

@@ -23,10 +23,11 @@ public class ServSignup extends HttpServlet {
 	//	Defines what should occur when a POST request is made.
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Model instance = Model.getInstance();
 		Account account = new Account(req.getParameter("name"), req.getParameter("pw"));
 		account.recordTransaction(new Deposit(account, Integer.parseInt(req.getParameter("deposit"))));
-		Model.add(account);
-		Model.setUser(account);
+		instance.add(account);
+		instance.setUser(account);
 		//	req.getRequestDispatcher("/views/menu.jsp").forward(req, resp);
 		//	FINALLY. This is how it works.
 		resp.sendRedirect("/menu");
