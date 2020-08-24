@@ -1,3 +1,3 @@
 <component name="DependencyValidationManager">
-  <scope name="JSP" pattern="(file[jsp-bank.main]:java/*||file[jsp-bank]:web//*||file[jsp-bank]:build.gradle)&amp;&amp;!file[jsp-bank]:web/WEB-INF/*||file[Servlets]:java//*" />
+  <scope name="JSP" pattern="(file[jsp-bank.main]:java/*||file[jsp-bank]:web//*||file[jsp-bank]:build.gradle)&amp;&amp;!file[jsp-bank]:web/WEB-INF/*||file[Servlets]:java//*||file[jsp-bank.main]:java//*" />
 </component>
