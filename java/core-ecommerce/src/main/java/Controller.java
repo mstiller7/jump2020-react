@@ -47,7 +47,23 @@ public class Controller {
 	}
 	
 	public void menu() {
-	
+		
+		View.splashMenu();
+		
+		switch (View.getInt("Enter choice (1, 2, or 3):")) {
+			case 1 -> order();
+			case 2 -> replace();
+			case 3 -> {
+				customer = null;
+				View.success("You have been logged out.");
+				landing();
+			}
+			default -> {
+				View.alert("Error. Please retry.");
+				menu();
+			}
+		}
+		
 	}
 	
 	public void order() {

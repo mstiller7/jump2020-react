@@ -37,6 +37,15 @@ public class View {
 		info("+ --------------------- +");
 	}
 	
+	public static void splashMenu() {
+		info("+ ------------------------ +");
+		info("| CORE-COMMERCE: USER MENU |");
+		info("+ ------------------------ +");
+		System.out.println("1. Make Order");
+		System.out.println("1. Request Replacement");
+		System.out.println("3. Logout");
+	}
+	
 	//	Notices.
 	
 	public static void alert(String alert) {
